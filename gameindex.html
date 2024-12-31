@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy Games</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="gamestyles.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Anatomy Games</h1>
+            <p class="lead">Interactive anatomy learning with games and 3D models!</p>
+        </div>
+    </header>
+
+    <main class="container py-3">
+        <!-- 3D Model Embed Section -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <h2>Explore in 3D</h2>
+                <p>Interact with the 3D model of the base of the skull for a deeper understanding.</p>
+                <div class="sketchfab-embed-wrapper">
+                    <iframe 
+                        title="Base of Skull Version 1" 
+                        frameborder="0" 
+                        allowfullscreen 
+                        mozallowfullscreen="true" 
+                        webkitallowfullscreen="true" 
+                        allow="autoplay; fullscreen; xr-spatial-tracking" 
+                        src="https://sketchfab.com/models/0a5a1a0d14004a2f8a1032f7d1b56df2/embed" 
+                        style="width: 100%; height: 500px; max-width: 900px;">
+                    </iframe>
+                    <p class="embed-footer">
+                        <a href="https://sketchfab.com/3d-models/base-of-skull-version-1-0a5a1a0d14004a2f8a1032f7d1b56df2?utm_medium=embed&utm_campaign=share-popup&utm_content=0a5a1a0d14004a2f8a1032f7d1b56df2" 
+                            target="_blank" 
+                            rel="nofollow">
+                            Base of Skull Version 1
+                        </a> by 
+                        <a href="https://sketchfab.com/Aj_Ple?utm_medium=embed&utm_campaign=share-popup&utm_content=0a5a1a0d14004a2f8a1032f7d1b56df2" 
+                            target="_blank" 
+                            rel="nofollow">
+                            Aj_Ple
+                        </a> on 
+                        <a href="https://sketchfab.com" target="_blank" rel="nofollow">Sketchfab</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 py-5">
+          <!-- Game 1 -->
+          <div class="col-md-6 col-lg-4">
+              <div class="card shadow-sm">
+                  <img src="brain_CN.png" class="card-img-top" alt="Cranial Nerves Game" height="300" width="300">
+                  <div class="card-body">
+                      <h5 class="card-title">Cranial Nerves Game - Brain</h5>
+                      <p class="card-text">Test your knowledge of cranial nerves with this fun and interactive matching game.</p>
+                      <a href="brain.html" class="btn btn-primary">Play Game</a>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Game 2 -->
+          <div class="col-md-6 col-lg-4">
+              <div class="card shadow-sm">
+                  <img src="skull_CN.png" class="card-img-top" alt="Base of Skull Game" height="300" width="300">
+                  <div class="card-body">
+                      <h5 class="card-title">Cranial Nerves Game - Skull</h5>
+                      <p class="card-text">Test your knowledge of cranial nerves with this fun and interactive matching game.</p>
+                      <a href="skullbase.html" class="btn btn-primary">Play Game</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </main>
+
+    <footer class="bg-light text-center py-3">
+        <p class="mb-0">© 2024 Anatomy Games. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Link to external JavaScript -->
+    <script src="gamescripts.js"></script>
+</body>
+</html>

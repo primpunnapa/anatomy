@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Anatomy Matching Game</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Sketchfab Embed */
+    .sketchfab-embed-wrapper iframe{
+      width: 100vw;
+      max-width: 800px;
+      height: 500px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+/*      
+    .sketchfab-embed-wrapper iframe {
+      width: 100vw; /* Full viewport width */
+      /* height: 100vh;  Full viewport height */
+    /* } */
+
+    /* Feedback and Score */
+    #feedback {
+      font-size: 18px;
+      color: #333;
+    }
+
+    #score {
+      font-weight: bold;
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <!-- Game Page -->
+  <div id="game">
+    <h1>Match the Anatomy Part</h1>
+    <div class="sketchfab-embed-wrapper"> 
+      <iframe 
+        title="Base of Skull Version 1" 
+        frameborder="0" 
+        allowfullscreen 
+        mozallowfullscreen="true" 
+        webkitallowfullscreen="true" 
+        allow="autoplay; fullscreen; xr-spatial-tracking" 
+        src="https://sketchfab.com/models/0a5a1a0d14004a2f8a1032f7d1b56df2/embed">
+      </iframe>
+    </div>
+
+    <p>Select the correct name for the highlighted part:</p>
+    <div id="choices">
+      <button class="choice">Heart</button>
+      <button class="choice">Lungs</button>
+      <button class="choice">Liver</button>
+      <button class="choice">Brain</button>
+    </div>
+
+    <button id="fullscreen-btn">View Fullscreen</button>
+
+
+    <p id="feedback"></p>
+    <p>Score: <span id="score">0</span></p>
+  </div>
+
+  <footer>
+    <p>© 2024 Anatomy Matching Game</p>
+  </footer>
+
+  <script>
+    // JavaScript Logic
+
+    // DOM Elements
+    const choices = document.querySelectorAll(".choice");
+    const feedback = document.getElementById("feedback");
+    const scoreDisplay = document.getElementById("score");
+
+    // Game Data
+    let score = 0;
+    const correctAnswer = "Heart"; // Correct answer for this example
+
+    // Handle Choices
+    choices.forEach((choice) => {
+      choice.addEventListener("click", () => {
+        const userAnswer = choice.textContent;
+        if (userAnswer === correctAnswer) {
+          feedback.textContent = "Correct!";
+          feedback.style.color = "green";
+          score++;
+        } else {
+          feedback.textContent = "Wrong! Try again.";
+          feedback.style.color = "red";
+        }
+        scoreDisplay.textContent = score;
+      });
+    });
+
+    const iframe = document.querySelector(".sketchfab-embed-wrapper iframe");
+    const fullscreenButton = document.getElementById("fullscreen-btn");
+
+    fullscreenButton.addEventListener("click", () => {
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) { /* Firefox */
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari, and Opera */
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+        iframe.msRequestFullscreen();
+      }
+    });
+
+  </script>
+</body>
+</html>
