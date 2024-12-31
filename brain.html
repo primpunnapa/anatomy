@@ -46,17 +46,24 @@
 
         .label {
             position: absolute;
+            width: 50px;
+            height: 20px;
             background-color: rgba(255, 255, 255, 0.8);
-            padding: 1px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 3px; /* Makes slight rounded edges */
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         #options {
             display: flex;
             flex-direction: column;
             gap: 10px;
+            margin-left: 100px; 
         }
 
         .option {
@@ -88,7 +95,6 @@
         .line {
             stroke: #000;
             stroke-width: 2;
-            stroke-dasharray: 4;
         }
     </style>
 </head>
@@ -112,17 +118,26 @@
              <!-- SVG for lines -->
              <svg id="lines-container">
                 <!-- Example line -->
+                <line id="line-1" class="line" x1="290" y1="130" x2="550" y2="5"></line>
+                <line id="line-2" class="line" x1="270" y1="280" x2="500" y2="150"></line>
+                <line id="line-3" class="line" x1="260" y1="350" x2="500" y2="250"></line>
+                <line id="line-4" class="line" x1="185" y1="360" x2="2" y2="250"></line>
+                <line id="line-5" class="line" x1="311" y1="450" x2="400" y2="450"></line>
+                <line id="line-6" class="line" x1="312" y1="455" x2="450" y2="455"></line>
                 <line id="line-7" class="line" x1="310" y1="442" x2="370" y2="442"></line>
                 <line id="line-8" class="line" x1="311" y1="450" x2="400" y2="450"></line>
                 <line id="line-9" class="line" x1="312" y1="455" x2="450" y2="455"></line>
+                <line id="line-10" class="line" x1="310" y1="442" x2="370" y2="442"></line>
+                <line id="line-11" class="line" x1="311" y1="450" x2="400" y2="450"></line>
+                <line id="line-12" class="line" x1="312" y1="455" x2="450" y2="455"></line>
             </svg>
 
             <!-- Example labels -->
-            <div class="label" id="label-1" style="top: 115px; left: 286px;" data-match= "option-1">.</div>
-            <div class="label" id="label-2" style="top: 265px; left: 265px;" data-match= "option-2">.</div>
-            <div class="label" id="label-3" style="top: 335px; left: 255px;" data-match= "option-3">.</div>
-            <div class="label" id="label-4" style="top: 361px; left: 300px;" data-match= "option-4">.</div>
-            <div class="label" id="label-5" style="top: 390px; left: 315px;" data-match= "option-5">.</div>
+            <div class="label" id="label-1" style="top: 21px; left: 472px;" data-match= "option-1"></div>
+            <div class="label" id="label-2" style="top: 145px; left: 472px;" data-match= "option-2"></div>
+            <div class="label" id="label-3" style="top: 240px; left: 472px;" data-match= "option-3"></div>
+            <div class="label" id="label-4" style="top: 250px; left: 200px;" data-match= "option-4">.</div>
+            <!-- <div class="label" id="label-5" style="top: 390px; left: 315px;" data-match= "option-5">.</div> -->
             <div class="label" id="label-6" style="top: 420px; left: 260px;" data-match= "option-6">.</div>
             <div class="label" id="label-7" style="top: 427px; left: 366px;" data-match= "option-7">.</div>
             <div class="label" id="label-8" style="top: 430px; left: 400px;" data-match= "option-8">.</div>
