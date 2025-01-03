@@ -46,14 +46,21 @@
 
         .label {
             position: absolute;
-            width: 170px;
-            height: 20px;
+            width: 170px; 
+            height: 30px; 
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
-            border-radius: 3px; /* Makes slight rounded edges */
+            border-radius: 3px;
             cursor: pointer;
             color: green;
-            font-size: 16px;
+            font-size: 15px; /* Adjust font size to fit */
+            display: flex; /* Enables flexbox for centering */
+            align-items: center; /* Vertically centers the text */
+            justify-content: center; /* Horizontally centers the text */
+            text-align: center; /* Centers text inside the label */
+            /* overflow: hidden; Ensures text does not overflow */
+            white-space: nowrap; /* Prevents text wrapping */
+            /* text-overflow: ellipsis; Adds ellipsis for overflowing text */
         }
 
         #options {
@@ -85,7 +92,7 @@
         }
 
         .line {
-            stroke: #000;
+            stroke: #003285;
             stroke-width: 2;
         }
 
@@ -110,7 +117,7 @@
             <img src="2D Whole Brain.PNG" alt="Cranial Nerves Anatomy">
              <!-- SVG for lines -->
              <svg id="lines-container">
-                <!-- Example line -->
+                <!-- line -->
                 <line id="line-1" class="line" x1="290" y1="130" x2="550" y2="5"></line>
                 <line id="line-2" class="line" x1="270" y1="280" x2="500" y2="150"></line>
                 <line id="line-3" class="line" x1="260" y1="350" x2="500" y2="250"></line>
@@ -123,10 +130,15 @@
                 <line id="line-10" class="line" x1="305" y1="475" x2="670" y2="475"></line>
                 <line id="line-11" class="line" x1="290" y1="530" x2="500" y2="530"></line>
                 <line id="line-12" class="line" x1="195" y1="480" x2="-75" y2="480"></line>
+
+                <!-- optional line -->
+                <line id="line-13" class="line" x1="551" y1="140" x2="600" y2="140" stroke="red" stroke-width="2"></line>
+
             </svg>
 
-            <!-- Example labels -->
-            <div class="label" id="label-1" style="top: 21px; left: 472px;" data-match= "option-1"></div>
+
+            <!-- labels box -->
+            <div class="label" id="label-1" style="top: 21px; left: 510px;" data-match= "option-1"></div>
             <div class="label" id="label-2" style="top: 145px; left: 472px;" data-match= "option-2"></div>
             <div class="label" id="label-3" style="top: 240px; left: 472px;" data-match= "option-3"></div>
             <div class="label" id="label-4" style="top: 260px; left: -170px;" data-match= "option-4"></div>
@@ -160,7 +172,6 @@
     <script>
         const labels = document.querySelectorAll('.label');
         const options = document.querySelectorAll('.option');
-        const result = document.getElementById('result');
 
         options.forEach(option => {
             option.addEventListener('dragstart', (e) => {

@@ -18,6 +18,15 @@
             margin: 20px;
         }
 
+        #instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
 
         #game-container {
             display: flex;
@@ -32,7 +41,7 @@
             margin-left: 200px;
         }
 
-        .nerve, .organ {
+        .organ {
             padding: 10px;
             background-color: #ffffff;
             border: 1px solid #ddd;
@@ -82,15 +91,27 @@
 
         .label {
             position: absolute;
-            width: 100px;
-            height: 20px;
+            width: 100px; 
+            height: 40px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
-            border-radius: 3px; /* Makes slight rounded edges */
+            border-radius: 3px;
+            display: flex; /* Allows centering of image */
+            align-items: center; /* Vertically center the image */
+            justify-content: center; /* Horizontally center the image */
+            overflow: hidden; /* Ensures content stays within the label box */
             cursor: pointer;
             color: green;
             font-size: 16px;
         }
+
+        .label img {
+            width: 50%; /* Makes the image scale to fit the label width */
+            height: 50%; /* Makes the image scale to fit the label height */
+            object-fit: contain; /* Ensures the image scales proportionally */
+            border-radius: 3px; /* Matches the label's rounded corners */
+        }
+
 
     </style>
 </head>
@@ -149,16 +170,17 @@
             <!-- <div class="nerve" draggable="true" id="nerve-3">Oculomotor Nerve (CN III)</div> -->
             <!-- Add more cranial nerves -->
         <!-- </div> -->
+
         <div id="organs">
             <div class="organ" id="organ-1" draggable="true">
                 <img src="https://thumbs.dreamstime.com/b/children-nose-vector-illustration-40234892.jpg" alt="Nose">
                 Nose
             </div>
-            <div class="organ" id="organ-2" data-match="nerve-2" draggable="true">
+            <div class="organ" id="organ-2" draggable="true">
                 <img src="https://www.aucklandeye.co.nz/wp-content/uploads/2023/08/Blue-eyes.jpg" alt="Eye">
                 Eye
             </div>
-            <div class="organ" id="organ-3" data-match="nerve-3" draggable="true">
+            <div class="organ" id="organ-3" draggable="true">
                 <img src="https://www.shutterstock.com/image-vector/muscles-human-eye-muscle-anatomy-260nw-1455190631.jpg" alt="Eye Muscle">
                 Eye Muscle
             </div>
@@ -167,27 +189,30 @@
     </div>
 
     <script>
-        const nerves = document.querySelectorAll('.nerve');
+        const labels = document.querySelectorAll('.label');
         const organs = document.querySelectorAll('.organ');
 
-        nerves.forEach(nerve => {
-            nerve.addEventListener('dragstart', e => {
+        organs.forEach(organ => {
+            organ.addEventListener('dragstart', e => {
                 e.dataTransfer.setData('text', e.target.id);
             });
         });
 
-        organs.forEach(organ => {
-            organ.addEventListener('dragover', e => {
+        labels.forEach(label => {
+            label.addEventListener('dragover', e => {
                 e.preventDefault();
             });
 
-            organ.addEventListener('drop', e => {
+            label.addEventListener('drop', e => {
                 e.preventDefault();
                 const draggedId = e.dataTransfer.getData('text');
-                const nerve = document.getElementById(draggedId);
+                const dragorgan = document.getElementById(draggedId);
 
-                if (organ.dataset.match === draggedId) {
-                    organ.classList.add('matched');
+                if (label.dataset.match === dragorgan.id) {
+                    label.innerHTML = dragorgan.outerHTML; // Append the organ's HTML to the label
+                    dragorgan.setAttribute('draggable', 'false'); // Make the organ non-draggable
+                    label.classList.add('matched'); // Add matched styling to the label
+                    dragorgan.classList.add('matched'); // Add matched styling to the organ
                 } else {
                     alert('Incorrect match. Try again!');
                 }
