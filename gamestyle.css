@@ -32,3 +32,9 @@ footer {
     padding: 20px 0;
     text-align: center;
 }
+
+
+body {
+    background-color: #f8f9fa;
+    font-family: "Yrsa", sans-serif; 
+}
