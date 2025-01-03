@@ -46,24 +46,21 @@
 
         .label {
             position: absolute;
-            width: 50px;
+            width: 170px;
             height: 20px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
             border-radius: 3px; /* Makes slight rounded edges */
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            font-weight: bold;
+            color: green;
+            font-size: 16px;
         }
 
         #options {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-left: 100px; 
+            margin-left: 200px; 
         }
 
         .option {
@@ -76,11 +73,6 @@
 
         .option:hover {
             background-color: #d0e0ff;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
         }
 
         svg {
@@ -96,6 +88,7 @@
             stroke: #000;
             stroke-width: 2;
         }
+
     </style>
 </head>
 <body>
@@ -121,30 +114,30 @@
                 <line id="line-1" class="line" x1="290" y1="130" x2="550" y2="5"></line>
                 <line id="line-2" class="line" x1="270" y1="280" x2="500" y2="150"></line>
                 <line id="line-3" class="line" x1="260" y1="350" x2="500" y2="250"></line>
-                <line id="line-4" class="line" x1="185" y1="360" x2="2" y2="250"></line>
-                <line id="line-5" class="line" x1="311" y1="450" x2="400" y2="450"></line>
-                <line id="line-6" class="line" x1="312" y1="455" x2="450" y2="455"></line>
-                <line id="line-7" class="line" x1="310" y1="442" x2="370" y2="442"></line>
-                <line id="line-8" class="line" x1="311" y1="450" x2="400" y2="450"></line>
-                <line id="line-9" class="line" x1="312" y1="455" x2="450" y2="455"></line>
-                <line id="line-10" class="line" x1="310" y1="442" x2="370" y2="442"></line>
-                <line id="line-11" class="line" x1="311" y1="450" x2="400" y2="450"></line>
-                <line id="line-12" class="line" x1="312" y1="455" x2="450" y2="455"></line>
+                <line id="line-4" class="line" x1="185" y1="360" x2="-75" y2="250"></line>
+                <line id="line-5" class="line" x1="160" y1="390" x2="-75" y2="300"></line>
+                <line id="line-6" class="line" x1="225" y1="435" x2="-75" y2="350"></line>
+                <line id="line-7" class="line" x1="310" y1="442" x2="555" y2="317"></line>
+                <line id="line-8" class="line" x1="311" y1="450" x2="600" y2="380"></line>
+                <line id="line-9" class="line" x1="312" y1="455" x2="650" y2="455"></line>
+                <line id="line-10" class="line" x1="305" y1="475" x2="670" y2="475"></line>
+                <line id="line-11" class="line" x1="290" y1="530" x2="500" y2="530"></line>
+                <line id="line-12" class="line" x1="195" y1="480" x2="-75" y2="480"></line>
             </svg>
 
             <!-- Example labels -->
             <div class="label" id="label-1" style="top: 21px; left: 472px;" data-match= "option-1"></div>
             <div class="label" id="label-2" style="top: 145px; left: 472px;" data-match= "option-2"></div>
             <div class="label" id="label-3" style="top: 240px; left: 472px;" data-match= "option-3"></div>
-            <div class="label" id="label-4" style="top: 250px; left: 200px;" data-match= "option-4">.</div>
-            <!-- <div class="label" id="label-5" style="top: 390px; left: 315px;" data-match= "option-5">.</div> -->
-            <div class="label" id="label-6" style="top: 420px; left: 260px;" data-match= "option-6">.</div>
-            <div class="label" id="label-7" style="top: 427px; left: 366px;" data-match= "option-7">.</div>
-            <div class="label" id="label-8" style="top: 430px; left: 400px;" data-match= "option-8">.</div>
-            <div class="label" id="label-9" style="top: 436px; left: 450px;" data-match= "option-9">.</div>
-            <div class="label" id="label-10" style="top: 455px; left: 300px;" data-match= "option-10">.</div>
-            <div class="label" id="label-11" style="top: 520px; left: 280px;" data-match= "option-11">.</div>
-            <div class="label" id="label-12" style="top: 480px; left: 287px;" data-match= "option-12">.</div>
+            <div class="label" id="label-4" style="top: 260px; left: -170px;" data-match= "option-4"></div>
+            <div class="label" id="label-5" style="top: 310px; left: -170px;" data-match= "option-5"></div>
+            <div class="label" id="label-6" style="top: 350px; left: -170px;" data-match= "option-6"></div>
+            <div class="label" id="label-7" style="top: 340px; left: 472px;" data-match= "option-7"></div>
+            <div class="label" id="label-8" style="top: 390px; left: 473px;" data-match= "option-8"></div>
+            <div class="label" id="label-9" style="top: 434px; left: 472px;" data-match= "option-9"></div>
+            <div class="label" id="label-10" style="top: 465px; left: 472px;" data-match= "option-10"></div>
+            <div class="label" id="label-11" style="top: 510px; left: 472px;" data-match= "option-11"></div>
+            <div class="label" id="label-12" style="top: 470px; left: -170px;" data-match= "option-12"></div>
         </div>
         <div id="options">
             <!-- Options for matching -->
@@ -160,7 +153,6 @@
             <div class="option" draggable="true" id="option-10">Vagus nerve (CN X)</div>
             <div class="option" draggable="true" id="option-11">Accessory nerve (CN XI)</div>
             <div class="option" draggable="true" id="option-12">Hypoglossal nerve (CN XII)</div>
-
         </div>
     </div>
     <div id="result"></div>
@@ -188,9 +180,8 @@
                 if (label.dataset.match === draggedOption.id) {
                     label.textContent = draggedOption.textContent;
                     draggedOption.style.display = 'none';
-                    result.textContent = 'Correct!';
                 } else {
-                    result.textContent = 'Try again!';
+                    alert('Incorrect match. Try again!');
                 }
             });
         });
