@@ -1,40 +1,39 @@
+/* web page stly */
+
 header {
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    padding: 50px 0;
+    background-color: #40A2E3;
+    color: #FFF6E9; 
 }
 
-.embed-footer {
-    font-size: 13px;
-    font-weight: normal;
-    margin: 5px;
-    color: #4A4A4A;
+.display-4 {
+    font-weight: 550;
 }
 
-.embed-footer a {
-    font-weight: bold;
-    color: #1CAAD9;
-}
-
-.card {
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: scale(1.05);
+body {
+    background-color: #f8f9fa; 
+    font-family: "Ubuntu", serif; 
 }
 
 footer {
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    text-align: center;
+    color: black; 
+    
 }
 
+.card-title {
+    font-family: 'Ubuntu', serif; 
+    font-weight: 400;
+    color : #0D9276;
+}
 
-body {
-    background-color: #f8f9fa;
-    font-family: "Yrsa", sans-serif; 
+.card-text {
+    font-family: "Ubuntu", serif;
+}
+
+.btn {
+    background-color: #40A2E3;
+    border: #40A2E3;
+}
+
+.col-12 {
+    color: #0D9276;
 }
