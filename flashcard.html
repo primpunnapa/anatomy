@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .flashcard {
+      font-size: 24px;
+      margin: 20px 0;
+      padding: 20px;
+      border: 2px solid #007BFF;
+      border-radius: 8px;
+      background: #e9f5ff;
+    }
+
+    .timer {
+      font-size: 32px;
+      font-weight: bold;
+      color: #ff4444;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .incorrect {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Flashcard Game</h1>
+    <div id="timer" class="timer">30</div>
+    <div id="flashcard" class="flashcard">Question goes here</div>
+    <div id="result" class="result"></div>
+    <button id="answer-button" class="button">Answer</button>
+    <button id="next-button" class="button" style="display: none;">Next</button>
+  </div>
+
+  <script>
+    // ตัวอย่างคำถามและคำตอบ
+    const flashcards = [
+      { question: "What is the capital of France?", answer: "Paris" },
+      { question: "What is 2 + 2?", answer: "4" },
+      { question: "What is the largest planet in our solar system?", answer: "Jupiter" },
+      { question: "What is the square root of 16?", answer: "4" },
+      { question: "What is the color of the sky?", answer: "Blue" }
+    ];
+
+    let currentIndex = 0;
+    let timer = 30; // ตั้งเวลา 30 วินาที
+    let countdown;
+
+    const timerElement = document.getElementById("timer");
+    const flashcardElement = document.getElementById("flashcard");
+    const resultElement = document.getElementById("result");
+    const answerButton = document.getElementById("answer-button");
+    const nextButton = document.getElementById("next-button");
+
+    // ฟังก์ชันอัปเดตการ์ด
+    function updateFlashcard() {
+      if (currentIndex < flashcards.length) {
+        flashcardElement.textContent = flashcards[currentIndex].question;
+        resultElement.textContent = "";
+        answerButton.style.display = "inline-block"; // แสดงปุ่ม Answer
+        nextButton.style.display = "none"; // ซ่อนปุ่ม Next
+      } else {
+        flashcardElement.textContent = "You've completed all flashcards!";
+        clearInterval(countdown); // หยุดการนับเวลา
+        timerElement.textContent = "0";
+        nextButton.style.display = "none"; // ซ่อนปุ่ม Next เมื่อจบเกม
+        resultElement.textContent = "";
+      }
+    }
+
+    // ฟังก์ชันจับเวลาถอยหลัง
+    function startTimer() {
+      timer = 30;
+      timerElement.textContent = timer;
+      clearInterval(countdown); // ล้างการนับเวลาหากมี
+      countdown = setInterval(() => {
+        timer--;
+        timerElement.textContent = timer;
+        if (timer === 0) {
+          clearInterval(countdown); // หยุดการนับเวลาเมื่อหมดเวลา
+          showAnswer(); // แสดงคำตอบเมื่อหมดเวลา
+        }
+      }, 1000);
+    }
+
+    // ฟังก์ชันแสดงคำตอบ
+    function showAnswer() {
+      const correctAnswer = flashcards[currentIndex].answer;
+      resultElement.textContent = `The correct answer is "${correctAnswer}".`;
+      resultElement.className = "result incorrect"; 
+
+      answerButton.style.display = "none"; // ซ่อนปุ่ม Answer
+      nextButton.style.display = "inline-block"; // แสดงปุ่ม Next
+      clearInterval(countdown); // หยุดจับเวลา
+    }
+
+    // ฟังก์ชันแสดงคำถามถัดไป
+    function nextFlashcard() {
+      currentIndex++;
+      updateFlashcard();
+      startTimer();
+    }
+
+    // เริ่มเกม
+    answerButton.addEventListener("click", showAnswer);
+    nextButton.addEventListener("click", nextFlashcard);
+    updateFlashcard();
+    startTimer();
+  </script>
+</body>
+</html>
