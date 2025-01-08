@@ -96,6 +96,21 @@
             stroke-width: 2;
         }
 
+        #reveal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #reveal-button:hover {
+            background-color: #45a049;
+        }
+
     </style>
 </head>
 <body>
@@ -131,14 +146,11 @@
                 <line id="line-11" class="line" x1="290" y1="530" x2="500" y2="530"></line>
                 <line id="line-12" class="line" x1="195" y1="480" x2="-75" y2="480"></line>
 
-                <!-- connector line -->
-                <line id="line-13" class="line" x1="551" y1="41" x2="400" y2="41"></line>
-
             </svg>
 
 
             <!-- labels box -->
-            <div class="label" id="label-1" style="top: 21px; left: 510px;" data-match= "option-1"></div>
+            <div class="label" id="label-1" style="top: 21px; left: 472px;" data-match= "option-1"></div>
             <div class="label" id="label-2" style="top: 145px; left: 472px;" data-match= "option-2"></div>
             <div class="label" id="label-3" style="top: 240px; left: 472px;" data-match= "option-3"></div>
             <div class="label" id="label-4" style="top: 260px; left: -170px;" data-match= "option-4"></div>
@@ -167,7 +179,8 @@
             <div class="option" draggable="true" id="option-12">Hypoglossal nerve (CN XII)</div>
         </div>
     </div>
-    <div id="result"></div>
+
+    <button id="reveal-button">Answer</button>
 
     <script>
         const labels = document.querySelectorAll('.label');
@@ -193,6 +206,18 @@
                     draggedOption.style.display = 'none';
                 } else {
                     alert('Incorrect match. Try again!');
+                }
+            });
+        });
+
+        // Reveal answers functionality
+        document.getElementById('reveal-button').addEventListener('click', () => {
+            labels.forEach(label => {
+                const matchId = label.dataset.match;
+                const option = document.getElementById(matchId);
+                if (option) {
+                    label.textContent = option.textContent;
+                    option.style.display = 'none';
                 }
             });
         });
