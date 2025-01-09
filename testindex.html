@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Anatomy Matching Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Home Page -->
+  <div id="home" class="visible">
+    <h1>Welcome to the 3D Anatomy Matching Game!</h1>
+    <button id="startGame">Start Game</button>
+  </div>
+
+  <!-- Game Page -->
+  <div id="game">
+    <h1>3D Anatomy Matching Game</h1>
+    <div id="score">Score: 0</div>
+    <div id="canvas-container"></div>
+    <div id="names"></div>
+    <div id="feedback"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.2/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
