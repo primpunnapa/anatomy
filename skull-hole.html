@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Aspect of Base of Skull Matching Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin: 20px;
+        }
+
+        #instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        #game-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        #image-container {
+            position: relative;
+        }
+
+        #image-container img {
+            max-width: 1200px;
+            height: 800px;
+        }
+
+        .label {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #d0e0ff;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .line {
+            stroke: #003285;
+            stroke-width: 2;
+        }
+
+        #reveal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #reveal-button:hover {
+            background-color: #45a049;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Internal Aspect of Base of Skull Matching Game</h1>
+    <div id="instructions">
+        <h2>How to Play</h2>
+        <p>Match the internal aspect of base of skull to their correct positions on the anatomy diagram.</p>
+        <p><strong>Steps:</strong></p>
+        <ol>
+            <li>Drag an internal aspect of base of skull name from the options on the right.</li>
+            <li>Drop it onto the correct labeled position on the diagram.</li>
+            <li>If the match is correct, the label will update with the internal aspect of base of skull name. If not, try again!</li>
+        </ol>
+        <p>Match all the internal aspect of base of skull to complete the game. Good luck!</p>
+    </div>
+
+    <div id="game-container">
+        <div id="image-container">
+            <img src="https://sv1.img.in.th/iRVl9B.jpeg" alt="Base of Skull Anatomy"> 
+            <!-- Example labels -->
+            <div class="label" id="label-1" style="top: 55px; left: 285px;" data-match= "option-1">1</div>
+            <div class="label" id="label-2" style="top: 60px; left: 838px;" data-match= "option-8">2</div>
+            <div class="label" id="label-3" style="top: 105px; left: 265px;" data-match= "option-2">3</div>
+            <div class="label" id="label-4" style="top: 125px; left: 842px;" data-match= "option-9">4</div>
+            <div class="label" id="label-5" style="top: 165px; left: 245px;" data-match= "option-3">5</div>
+            <div class="label" id="label-6" style="top: 165px; left: 890px;" data-match= "option-10">6</div>
+            <div class="label" id="label-7" style="top: 210px; left: 220px;" data-match= "option-4">7</div>
+            <div class="label" id="label-8" style="top: 225px; left: 900px;" data-match= "option-11">8</div>
+            <div class="label" id="label-9" style="top: 305px; left: 175px;" data-match= "option-5">9</div>
+            <div class="label" id="label-10" style="top: 273px; left: 915px;" data-match= "option-12">10</div> <!--wrong-->
+            <div class="label" id="label-11" style="top: 310px; left: 915px;" data-match= "option-13">11</div>
+            <div class="label" id="label-12" style="top: 395px; left: 155px;" data-match= "option-6">12</div>
+            <div class="label" id="label-13" style="top: 560px; left: 155px;" data-match= "option-7">13</div>
+            <div class="label" id="label-14" style="top: 535px; left: 915px;" data-match= "option-14">14</div>
+            <div class="label" id="label-15" style="top: 625px; left: 895px;" data-match= "option-15">15</div>
+            <div class="label" id="label-16" style="top: 683px; left: 835px;" data-match= "option-16">16</div>
+        </div>
+        <div id="options">
+            <!-- Options for matching -->
+            <div class="option" draggable="true" id="option-14">Internal acoustic meatus</div>
+            <div class="option" draggable="true" id="option-13">Foramen spinosum</div>
+            <div class="option" draggable="true" id="option-10">Foramen lacerum</div>
+            <div class="option" draggable="true" id="option-7">Foramen magnum</div>
+            <div class="option" draggable="true" id="option-2">Crista galli</div>
+            <div class="option" draggable="true" id="option-15">Jugalar foramen</div>
+            <div class="option" draggable="true" id="option-6">Hypophyseal fossa</div>
+            <div class="option" draggable="true" id="option-1">Foramen cecum</div>
+            <div class="option" draggable="true" id="option-8">Foramina of cribiform plate of ethmoid bone</div>
+            <div class="option" draggable="true" id="option-5">Superior orbital fissure</div>
+            <div class="option" draggable="true" id="option-9">Optic canal</div>
+            <div class="option" draggable="true" id="option-3">Anterior ethmoidal foramen</div>
+            <div class="option" draggable="true" id="option-11">Foramen rotundum</div>
+            <div class="option" draggable="true" id="option-4">Posterior ethmoidal foramen</div>
+            <div class="option" draggable="true" id="option-16">Hypoglossal canal</div>
+            <div class="option" draggable="true" id="option-12">Foramen ovale</div>
+
+        </div>
+    </div>
+    <div id="result"></div>
+
+    <button id="reveal-button">Answer</button>
+
+    <script>
+        const labels = document.querySelectorAll('.label');
+        const options = document.querySelectorAll('.option');
+
+        options.forEach(option => {
+            option.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text', e.target.id);
+            });
+        });
+
+        labels.forEach(label => {
+            label.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            label.addEventListener('drop', (e) => {
+                const draggedId = e.dataTransfer.getData('text');
+                const draggedOption = document.getElementById(draggedId);
+                
+                if (label.dataset.match === draggedOption.id) {
+                    label.textContent = draggedOption.textContent;
+                    label.classList.add('correct');
+                    draggedOption.style.display = 'none';
+                    
+                } else {
+                    alert('Incorrect match. Try again!');
+                }
+            });
+        });
+
+        // Reveal answers functionality
+        document.getElementById('reveal-button').addEventListener('click', () => {
+            labels.forEach(label => {
+                const matchId = label.dataset.match;
+                const option = document.getElementById(matchId);
+                if (option) {
+                    label.textContent = option.textContent;
+                    label.classList.add('correct');
+                    option.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cranial Nerves Matching Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin: 20px;
+        }
+
+        #instructions {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        #game-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+        }
+
+        #image-container {
+            position: relative;
+        }
+
+        #image-container img {
+            max-width: 1200px;
+            height: 800px;
+        }
+
+        .label {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background-color: #d0e0ff;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .line {
+            stroke: #003285;
+            stroke-width: 2;
+        }
+
+        #reveal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #reveal-button:hover {
+            background-color: #45a049;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Cranial Nerves Matching Game</h1>
+    <div id="instructions">
+        <h2>How to Play</h2>
+        <p>Match the cranial nerve names to their correct positions on the anatomy diagram.</p>
+        <p><strong>Steps:</strong></p>
+        <ol>
+            <li>Drag a cranial nerve name from the options on the right.</li>
+            <li>Drop it onto the correct labeled position on the diagram.</li>
+            <li>If the match is correct, the label will update with the nerve name. If not, try again!</li>
+        </ol>
+        <p>Match all the cranial nerves to complete the game. Good luck!</p>
+    </div>
+
+    <div id="game-container">
+        <div id="image-container">
+            <img src="https://sv1.img.in.th/i1Yj5y.jpeg" alt="Base of Skull Anatomy"> 
+            <!-- Example labels -->
+            <div class="label" id="label-1" style="top: 45px; left: 252px;" data-match= "option-1">1</div>
+            <div class="label" id="label-2" style="top: 110px; left: 245px;" data-match= "option-2">2</div>
+            <div class="label" id="label-3" style="top: 150px; left: 165px;" data-match= "option-3">3</div>
+            <div class="label" id="label-4" style="top: 205px; left: 145px;" data-match= "option-4">4</div>
+            <div class="label" id="label-5" style="top: 315px; left: 100px;" data-match= "option-5">5</div>
+            <div class="label" id="label-6" style="top: 405px; left: 100px;" data-match= "option-6">6</div>
+            <div class="label" id="label-7" style="top: 460px; left: 100px;" data-match= "option-7">7</div>
+            <div class="label" id="label-8" style="top: 525px; left: 30px;" data-match= "option-8">8</div>
+            <div class="label" id="label-9" style="top: 580px; left: 50px;" data-match= "option-9">9</div>
+            <div class="label" id="label-10" style="top: 645px; left: 155px;" data-match= "option-10">10</div>
+            <div class="label" id="label-11" style="top: 710px; left: 165px;" data-match= "option-11">11</div>
+            <div class="label" id="label-12" style="top: 755px; left: 125px;" data-match= "option-12">12</div>
+        </div>
+        <div id="options">
+            <!-- Options for matching -->
+            <div class="option" draggable="true" id="option-11">Accessory nerve</div>
+            <div class="option" draggable="true" id="option-7">Facial nerve</div>
+            <div class="option" draggable="true" id="option-9">Glossopharyngeal nerve</div>
+            <div class="option" draggable="true" id="option-1">Olfactory nerve</div>
+            <div class="option" draggable="true" id="option-4">Trochlear nerve</div>
+            <div class="option" draggable="true" id="option-3">Oculomotor nerve</div>
+            <div class="option" draggable="true" id="option-12">Hypoglossal nerve</div>
+            <div class="option" draggable="true" id="option-2">Optic nerve</div>
+            <div class="option" draggable="true" id="option-5">Trigeminal nerve</div>
+            <div class="option" draggable="true" id="option-8">Vestibulocochlear nerve</div>
+            <div class="option" draggable="true" id="option-10">Vagus nerve</div>
+            <div class="option" draggable="true" id="option-6">Abducens nerve</div>
+
+        </div>
+    </div>
+    <div id="result"></div>
+
+    <button id="reveal-button">Answer</button>
+
+    <script>
+        const labels = document.querySelectorAll('.label');
+        const options = document.querySelectorAll('.option');
+
+        options.forEach(option => {
+            option.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text', e.target.id);
+            });
+        });
+
+        labels.forEach(label => {
+            label.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            label.addEventListener('drop', (e) => {
+                const draggedId = e.dataTransfer.getData('text');
+                const draggedOption = document.getElementById(draggedId);
+                
+                if (label.dataset.match === draggedOption.id) {
+                    label.textContent = draggedOption.textContent;
+                    label.classList.add('correct');
+                    draggedOption.style.display = 'none';
+                } else {
+                    alert('Incorrect match. Try again!');
+                }
+            });
+        });
+
+        // Reveal answers functionality
+        document.getElementById('reveal-button').addEventListener('click', () => {
+            labels.forEach(label => {
+                const matchId = label.dataset.match;
+                const option = document.getElementById(matchId);
+                if (option) {
+                    label.textContent = option.textContent;
+                    label.classList.add('correct');
+                    option.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
