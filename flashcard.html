@@ -57,16 +57,15 @@
     .result {
       font-size: 20px;
       margin-top: 10px;
+      color: #ff4444;
     }
 
-    .correct {
-      color: green;
+    .hidden {
+      display: none;
     }
 
-    .incorrect {
-      color: red;
-    }
   </style>
+
 </head>
 <body>
   <div class="container">
@@ -75,11 +74,13 @@
     <div id="flashcard" class="flashcard">Question goes here</div>
     <div id="result" class="result"></div>
     <button id="answer-button" class="button">Answer</button>
+    <button id="correct-button" class="button" style="display: none; background-color: green">Correct</button>
+    <button id="wrong-button" class="button" style="display: none; background-color: red;">Wrong</button>
     <button id="next-button" class="button" style="display: none;">Next</button>
   </div>
 
   <script>
-    // ตัวอย่างคำถามและคำตอบ
+    // Question & answer
     const flashcards = [
       { question: "What is the capital of France?", answer: "Paris" },
       { question: "What is 2 + 2?", answer: "4" },
@@ -89,13 +90,16 @@
     ];
 
     let currentIndex = 0;
-    let timer = 30; // ตั้งเวลา 30 วินาที
+    let timer = 30; // set time 30 second
     let countdown;
+    let score = 0;
 
     const timerElement = document.getElementById("timer");
     const flashcardElement = document.getElementById("flashcard");
     const resultElement = document.getElementById("result");
     const answerButton = document.getElementById("answer-button");
+    const correctButton = document.getElementById("correct-button");
+    const wrongButton = document.getElementById("wrong-button");
     const nextButton = document.getElementById("next-button");
 
     // ฟังก์ชันอัปเดตการ์ด
@@ -103,52 +107,80 @@
       if (currentIndex < flashcards.length) {
         flashcardElement.textContent = flashcards[currentIndex].question;
         resultElement.textContent = "";
-        answerButton.style.display = "inline-block"; // แสดงปุ่ม Answer
-        nextButton.style.display = "none"; // ซ่อนปุ่ม Next
+        answerButton.style.display = "inline-block"; // show answer button
+        correctButton.style.display = "none"; // hide Correct button
+        wrongButton.style.display = "none"; // hide Wrong button
+        nextButton.style.display = "none"; // hide Next button
+        timerElement.classList.remove("hidden");
       } else {
-        flashcardElement.textContent = "You've completed all flashcards!";
-        clearInterval(countdown); // หยุดการนับเวลา
+        // แสดงผลลัพธ์สุดท้าย
+        flashcardElement.textContent = "Game Over!";
+        resultElement.textContent = `Your final score is: ${score}/${flashcards.length}`;
+        clearInterval(countdown); // stop counting
         timerElement.textContent = "0";
-        nextButton.style.display = "none"; // ซ่อนปุ่ม Next เมื่อจบเกม
-        resultElement.textContent = "";
+        answerButton.style.display = "none";
+        correctButton.style.display = "none";
+        wrongButton.style.display = "none";
+        nextButton.style.display = "none";
+        timerElement.classList.add("hidden");
       }
     }
 
-    // ฟังก์ชันจับเวลาถอยหลัง
+    // reckon time
     function startTimer() {
       timer = 30;
       timerElement.textContent = timer;
-      clearInterval(countdown); // ล้างการนับเวลาหากมี
+      clearInterval(countdown); // reset time
       countdown = setInterval(() => {
         timer--;
         timerElement.textContent = timer;
         if (timer === 0) {
-          clearInterval(countdown); // หยุดการนับเวลาเมื่อหมดเวลา
-          showAnswer(); // แสดงคำตอบเมื่อหมดเวลา
+          clearInterval(countdown); // stop counting
+          showAnswer();
         }
       }, 1000);
     }
 
-    // ฟังก์ชันแสดงคำตอบ
+    // show the answer
     function showAnswer() {
       const correctAnswer = flashcards[currentIndex].answer;
-      resultElement.textContent = `The correct answer is "${correctAnswer}".`;
-      resultElement.className = "result incorrect"; 
+      resultElement.textContent = `The answer is "${correctAnswer}".`;
+      resultElement.className = "result incorrect";
 
-      answerButton.style.display = "none"; // ซ่อนปุ่ม Answer
-      nextButton.style.display = "inline-block"; // แสดงปุ่ม Next
-      clearInterval(countdown); // หยุดจับเวลา
+      clearInterval(countdown);
+      answerButton.style.display = "none"; 
+      correctButton.style.display = "inline-block"; 
+      wrongButton.style.display = "inline-block"; 
+      nextButton.style.display = "inline-block";
+    }
+    
+    // increase score
+    function markCorrect() {
+      score++;
+      hideActionButtons(); // hide correct & wrong buttons
     }
 
-    // ฟังก์ชันแสดงคำถามถัดไป
+    // incorrect answer
+    function markWrong() {
+      hideActionButtons(); 
+    }
+
+    // hide button
+    function hideActionButtons() {
+      correctButton.style.display = "none"; 
+      wrongButton.style.display = "none"; 
+    }
+
     function nextFlashcard() {
       currentIndex++;
       updateFlashcard();
       startTimer();
     }
 
-    // เริ่มเกม
+    // starter
     answerButton.addEventListener("click", showAnswer);
+    correctButton.addEventListener("click", markCorrect);
+    wrongButton.addEventListener("click", markWrong);
     nextButton.addEventListener("click", nextFlashcard);
     updateFlashcard();
     startTimer();
