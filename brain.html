@@ -40,19 +40,9 @@
         }
 
         #image-container img {
-            max-width: 600px;
-            height: 600px;
+            max-width: 1200px;
+            height: 800px;
         }
-
-        /* .label {
-            color: gray;
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.8); 
-            padding: 1px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            cursor: pointer;
-        } */
 
         .label {
             color: gray;
@@ -62,29 +52,12 @@
             border: 1px solid #ccc;
             border-radius: 3px;
             cursor: pointer;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box; /* สำคัญเพื่อรักษาขนาด */
         }
-
-        .option {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            box-sizing: border-box; /* สำคัญเพื่อรักษาขนาด */
-        }
-
 
         #options {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-left: 200px; 
         }
 
         .option {
@@ -131,6 +104,7 @@
         .correct {
             color: green;
             font-weight: bold;
+            background-color: white;
         }
 
     </style>
@@ -151,54 +125,37 @@
 
     <div id="game-container">
         <div id="image-container">
-            <img src="2D Whole Brain.PNG" alt="Cranial Nerves Anatomy">
-             <!-- SVG for lines -->
-             <svg id="lines-container">
-                <!-- line -->
-                <line id="line-1" class="line" x1="290" y1="130" x2="550" y2="5"></line>
-                <line id="line-2" class="line" x1="270" y1="280" x2="500" y2="150"></line>
-                <line id="line-3" class="line" x1="260" y1="350" x2="500" y2="250"></line>
-                <line id="line-4" class="line" x1="185" y1="360" x2="-75" y2="250"></line>
-                <line id="line-5" class="line" x1="160" y1="390" x2="-75" y2="300"></line>
-                <line id="line-6" class="line" x1="225" y1="435" x2="-75" y2="350"></line>
-                <line id="line-7" class="line" x1="310" y1="442" x2="555" y2="317"></line>
-                <line id="line-8" class="line" x1="311" y1="450" x2="600" y2="380"></line>
-                <line id="line-9" class="line" x1="312" y1="455" x2="650" y2="455"></line>
-                <line id="line-10" class="line" x1="305" y1="475" x2="670" y2="475"></line>
-                <line id="line-11" class="line" x1="290" y1="530" x2="500" y2="530"></line>
-                <line id="line-12" class="line" x1="195" y1="480" x2="-75" y2="480"></line>
-
-            </svg>
+            <img src="brain.JPG" alt="Cranial Nerves Anatomy">
 
             <!-- labels box -->
-            <div class="label" id="label-1" style="top: 30px; left: 472px;" data-match= "option-1">1</div>
-            <div class="label" id="label-2" style="top: 155px; left: 472px;" data-match= "option-2">2</div>
-            <div class="label" id="label-3" style="top: 250px; left: 472px;" data-match= "option-3">3</div>
-            <div class="label" id="label-4" style="top: 270px; left: -10px;" data-match= "option-4">4</div>
-            <div class="label" id="label-5" style="top: 310px; left: -10px;" data-match= "option-5">5</div>
-            <div class="label" id="label-6" style="top: 360px; left: -10px;" data-match= "option-6">6</div>
-            <div class="label" id="label-7" style="top: 350px; left: 472px;" data-match= "option-7">7</div>
-            <div class="label" id="label-8" style="top: 400px; left: 473px;" data-match= "option-8">8</div>
-            <div class="label" id="label-9" style="top: 440px; left: 472px;" data-match= "option-9">9</div>
-            <div class="label" id="label-10" style="top: 465px; left: 472px;" data-match= "option-10">10</div>
-            <div class="label" id="label-11" style="top: 510px; left: 472px;" data-match= "option-11">11</div>
-            <div class="label" id="label-12" style="top: 470px; left:-20px;" data-match= "option-12">12</div>
+            <div class="label" id="label-1" style="top: 60px; right: 160px;" data-match= "option-1">1</div>
+            <div class="label" id="label-2" style="top: 130px; right: 155px;" data-match= "option-2">2</div>
+            <div class="label" id="label-3" style="top: 215px; right: 65px;" data-match= "option-3">3</div>
+            <div class="label" id="label-4" style="top: 290px; right: 72px;" data-match= "option-4">4</div>
+            <div class="label" id="label-5" style="top: 360px; right: 50px;" data-match= "option-5">5</div>
+            <div class="label" id="label-6" style="top: 440px; right: 50px;" data-match= "option-6">6</div>
+            <div class="label" id="label-7" style="top: 485px; right: 98px;" data-match= "option-7">7</div>
+            <div class="label" id="label-8" style="top: 520px; right: 32px;" data-match= "option-8">8</div>
+            <div class="label" id="label-9" style="top: 560px; right: 34px;" data-match= "option-9">9</div>
+            <div class="label" id="label-10" style="top: 615px; right: 150px;" data-match= "option-10">10</div>
+            <div class="label" id="label-11" style="top: 665px; right: 155px;" data-match= "option-11">11</div>
+            <div class="label" id="label-12" style="top: 715px; right: 210px;" data-match= "option-12">12</div>
         </div>
 
         <div id="options">
             <!-- Options for matching -->
-            <div class="option" draggable="true" id="option-1">Olfactory nerve (CN I)</div>
-            <div class="option" draggable="true" id="option-2">Optic nerve (CN II)</div>
-            <div class="option" draggable="true" id="option-3">Oculomotor nerve (CN III)</div>
-            <div class="option" draggable="true" id="option-4">Trochlear nerve (CN IV)</div>
-            <div class="option" draggable="true" id="option-5">Trigeminal nerve (CN V)</div>
-            <div class="option" draggable="true" id="option-6">Abducens nerve (CN VI)</div>
-            <div class="option" draggable="true" id="option-7">Facial nerve (CN VII)</div>
-            <div class="option" draggable="true" id="option-8">Vestibulocochlear nerve (CN VIII)</div>
-            <div class="option" draggable="true" id="option-9">Glossopharyngeal nerve (CN IX)</div>
-            <div class="option" draggable="true" id="option-10">Vagus nerve (CN X)</div>
-            <div class="option" draggable="true" id="option-11">Accessory nerve (CN XI)</div>
-            <div class="option" draggable="true" id="option-12">Hypoglossal nerve (CN XII)</div>
+            <div class="option" draggable="true" id="option-1">Olfactory nerve</div>
+            <div class="option" draggable="true" id="option-2">Optic nerve</div>
+            <div class="option" draggable="true" id="option-3">Oculomotor nerve</div>
+            <div class="option" draggable="true" id="option-4">Trochlear nerve</div>
+            <div class="option" draggable="true" id="option-5">Trigeminal nerve</div>
+            <div class="option" draggable="true" id="option-6">Abducens nerve</div>
+            <div class="option" draggable="true" id="option-7">Facial nerve</div>
+            <div class="option" draggable="true" id="option-8">Vestibulocochlear nerve</div>
+            <div class="option" draggable="true" id="option-9">Glossopharyngeal nerve</div>
+            <div class="option" draggable="true" id="option-10">Vagus nerve</div>
+            <div class="option" draggable="true" id="option-11">Accessory nerve</div>
+            <div class="option" draggable="true" id="option-12">Hypoglossal nerve</div>
         </div>
     </div>
 
@@ -227,9 +184,9 @@
                     label.textContent = draggedOption.textContent;
                     label.classList.add('correct'); // change color to be green
 
-                    // Copy dimensions from option to label
-                    label.style.width = `${draggedOption.offsetWidth}px`;
-                    label.style.height = `${draggedOption.offsetHeight}px`;
+                    // // Copy dimensions from option to label
+                    // label.style.width = `${draggedOption.offsetWidth}px`;
+                    // label.style.height = `${draggedOption.offsetHeight}px`;
                     
                     draggedOption.style.display = 'none';
 
@@ -240,47 +197,16 @@
         });
 
         // Reveal answers functionality
-        // document.getElementById('reveal-button').addEventListener('click', () => {
-        //     labels.forEach(label => {
-        //         const matchId = label.dataset.match;
-        //         const option = document.getElementById(matchId);
-        //         if (option) {
-        //             label.textContent = option.textContent;
-        //             label.classList.add('correct'); // change color to be green
-
-        //             // Copy dimensions from option to label
-        //             label.style.width = `${draggedOption.offsetWidth}px`;
-        //             label.style.height = `${draggedOption.offsetHeight}px`;
-        //             label.style.lineHeight = `${draggedOption.offsetHeight}px`; // Center text vertically
-
-        //             option.style.display = 'none';
-        //         }
-        //     });
-        // });
-
-        // Reveal answers functionality
-        let isRevealed = false;
-
         document.getElementById('reveal-button').addEventListener('click', () => {
-            if (isRevealed) return;
-
             labels.forEach(label => {
                 const matchId = label.dataset.match;
                 const option = document.getElementById(matchId);
                 if (option) {
                     label.textContent = option.textContent;
-                    label.classList.add('correct');  // change color to be green
-
-                    // Copy dimensions from option to label
-                    label.style.width = `${option.offsetWidth}px`;
-                    label.style.height = `${option.offsetHeight}px`;
-
+                    label.classList.add('correct'); // change color to be green
                     option.style.display = 'none';
                 }
             });
-
-            isRevealed = true;
-
         });
 
     </script>
