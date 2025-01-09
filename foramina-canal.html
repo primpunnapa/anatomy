@@ -4,55 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foramina/canal Matching Game</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="gamestyle.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            margin: 20px;
-        }
-
-        #instructions {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            max-width: 600px;
-            margin-bottom: 20px;
-        }
-
-        #game-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px;
-        }
-
-        #image-container {
-            position: relative;
-        }
-
-        #image-container img {
-            max-width: 1200px;
-            height: 800px;
-        }
-
-        .label {
-            color: gray;
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.8); 
-            padding: 1px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            cursor: pointer;
-        }
 
         #options1 {
             display: flex;
@@ -85,41 +39,6 @@
         .option:hover {
             background-color: #d0e0ff;
         }
-
-        svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .line {
-            stroke: #003285;
-            stroke-width: 2;
-        }
-
-        #reveal-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: large;
-        }
-
-        #reveal-button:hover {
-            background-color: #45a049;
-        }
-
-        .correct {
-            color: green;
-            font-weight: bold;
-        }
-
         
     </style>
 </head>
@@ -225,10 +144,10 @@
                 const draggedId = e.dataTransfer.getData('text');
                 const draggedOption = document.getElementById(draggedId);
 
-                // แยก data-match ออกเป็น array
+                // separate data-match into array
                 const matches = label.dataset.match.split(',').map(item => item.trim());
 
-                // ตรวจสอบว่า draggedId อยู่ใน matches หรือไม่
+                // check draggedId in matches
                 if (matches.includes(draggedId)) {
                     label.textContent = draggedOption.textContent;
                     label.classList.add('correct'); 
@@ -244,20 +163,18 @@
             labels.forEach(label => {
                 const matches = label.dataset.match.split(',').map(item => item.trim());
 
-                // กรอง matches เพื่อเอาเฉพาะตัวเลือกที่ยังไม่ถูกซ่อน
+                // filter matches only the one that has not hided
                 const availableOptions = matches.filter(matchId => {
                     const option = document.getElementById(matchId);
-                    return option && getComputedStyle(option).display !== 'none'; // ตรวจสอบว่าตัวเลือกยังมองเห็นได้
+                    return option && getComputedStyle(option).display !== 'none'; // check if we can see the option
                 });
 
-                // ถ้ามีตัวเลือกที่ยังใช้ได้ ให้สุ่มเลือกคำตอบ
+                // random the options if still it still has
                 if (availableOptions.length > 0) {
                     const randomMatch = availableOptions[Math.floor(Math.random() * availableOptions.length)];
                     const option = document.getElementById(randomMatch);
-
-                    // อัปเดต label ด้วยคำตอบที่สุ่มได้ และซ่อน option
                     label.textContent = option.textContent;
-                    label.classList.add('correct'); // เพิ่มคลาสสีเขียว
+                    label.classList.add('correct'); // change color to be green
                     option.style.display = 'none';
                 }
             });
