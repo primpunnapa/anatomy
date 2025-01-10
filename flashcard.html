@@ -102,7 +102,6 @@
     const wrongButton = document.getElementById("wrong-button");
     const nextButton = document.getElementById("next-button");
 
-    // ฟังก์ชันอัปเดตการ์ด
     function updateFlashcard() {
       if (currentIndex < flashcards.length) {
         flashcardElement.textContent = flashcards[currentIndex].question;
@@ -112,8 +111,9 @@
         wrongButton.style.display = "none"; // hide Wrong button
         nextButton.style.display = "none"; // hide Next button
         timerElement.classList.remove("hidden");
+
       } else {
-        // แสดงผลลัพธ์สุดท้าย
+        // show result
         flashcardElement.textContent = "Game Over!";
         resultElement.textContent = `Your final score is: ${score}/${flashcards.length}`;
         clearInterval(countdown); // stop counting
@@ -151,13 +151,13 @@
       answerButton.style.display = "none"; 
       correctButton.style.display = "inline-block"; 
       wrongButton.style.display = "inline-block"; 
-      nextButton.style.display = "inline-block";
+      nextButton.style.display = "none";
     }
 
     // increase score
     function markCorrect() {
       score++;
-      hideActionButtons(); // hide correct & wrong buttons
+      hideActionButtons(); // hide correct & wrong buttons but show next button
     }
 
     // incorrect answer
@@ -169,6 +169,8 @@
     function hideActionButtons() {
       correctButton.style.display = "none"; 
       wrongButton.style.display = "none"; 
+      nextButton.style.display = "inline-block";
+
     }
 
     function nextFlashcard() {
