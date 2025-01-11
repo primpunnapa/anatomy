@@ -20,18 +20,25 @@
       display: none;
       z-index: 1;
     }
-    .sketchfab-embed-wrapper {
+    /* .sketchfab-embed-wrapper {
       position: absolute;
       width: 400px;
       height: 400px;
       top: 100;
       left: 0;
     }
+
     iframe {
       width: 100%;
       height: 100%;
       border: none;
+    } */
+
+    .sketchfab-embed-wrapper iframe {
+      width: 100vw; /* Full viewport width */
+      height: 100vh;  /* Full viewport height */
     }
+
   </style>
 </head>
 <body>

@@ -49,3 +49,16 @@ h3 {
 p {
     font-size: 20px;
 }
+
+.team {
+    font-size: 30px;
+    text-align: center;
+    font-family: 'Ubuntu', serif;
+    color: #4A628A;
+    font-weight: 500;
+}
+
+.team-name {
+    font-size: 18px;
+    font-family: 'Ubuntu', serif;
+}
