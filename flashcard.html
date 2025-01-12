@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flashcard Game</title>
+  <!-- Link to Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Rubik", serif;
       text-align: center;
       margin: 0;
       padding: 0;
@@ -23,27 +27,30 @@
     }
 
     .flashcard {
+      font-family: "Rubik", serif;
       font-size: 24px;
       margin: 20px 0;
       padding: 20px;
-      border: 2px solid #007BFF;
+      border: 2px solid #40A2E3;
       border-radius: 8px;
       background: #e9f5ff;
     }
 
     .timer {
+      font-family: "Rubik", serif;
       font-size: 32px;
       font-weight: bold;
       color: #ff4444;
     }
 
     .button {
+      font-family: "Rubik", serif;
       display: inline-block;
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
       color: #fff;
-      background-color: #007BFF;
+      background-color: #40A2E3;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -51,10 +58,11 @@
     }
 
     .button:hover {
-      background-color: #0056b3;
+      background-color: #40A2E3;
     }
 
     .result {
+      font-family: "Rubik", serif;
       font-size: 20px;
       margin-top: 10px;
       color: #ff4444;
@@ -69,7 +77,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Flashcard Game</h1>
+    <h1 style="color: #0D9276;">Flashcard Game</h1>
     <div id="timer" class="timer">30</div>
     <div id="flashcard" class="flashcard">Question goes here</div>
     <div id="result" class="result"></div>

@@ -1,7 +1,7 @@
 /* game style */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Rubik", serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,11 +10,14 @@ body {
 }
 
 h1 {
+    font-family: "Rubik", serif;
+    color: #0D9276;
     margin: 20px;
 }
 
 #instructions {
-    background-color: #f9f9f9;
+    font-family: "Rubik", serif;
+    background-color: #BBE2EC;
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -40,6 +43,7 @@ h1 {
 }
 
 .label {
+    font-family: "Rubik", serif;
     color: gray;
     position: absolute;
     background-color: rgba(255, 255, 255, 0.8); 
@@ -68,6 +72,7 @@ h1 {
 }
 
 #reveal-button {
+    font-family: "Rubik", serif;
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #4CAF50;
@@ -83,6 +88,7 @@ h1 {
 }
 
 .correct {
+    font-family: "Rubik", serif;
     color: green;
     font-weight: bold;
     background-color: white;
