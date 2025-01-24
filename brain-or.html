@@ -4,31 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cranial Nerves Matching Game</title>
+
     <!-- Link to external CSS -->
     <link rel="stylesheet" href="gamestyle.css">
 
+    <!-- Link to Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900" rel="stylesheet">
+
     <style>
 
         #game-container {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            margin: 20px auto;
+            margin-top: 20px auto;
         }
 
-        #organs-container {
+        #image-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        #image-container img {
+            width: 1800px;
+            height: 900px;
+        }
+
+        #organs {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(6, 1fr);
             gap: 10px;
-            max-width: 300px;
-            padding: 10px;
-            margin-right: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+            padding: 0 10px;
         }
 
         .organ {
             text-align: center;
+            padding: 10px;
             background-color: #f2f2f2;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -37,40 +54,27 @@
         }
 
         .organ img {
-            width: 130px;
-            height: 100px;
+            width: 160px;
+            height: 150px;
+            margin-bottom: 10px;
         }
 
-        #image-container {
-            position: relative;
-            max-width: 1200px;
-        }
-
-        #image-container img {
-            margin: 150px 50px;
-            width: 1000px;
-            height: 800px;
+        .organ span {
+            font-size: 16px;
+            color: #333;
         }
 
         .label {
+            font-family: "Rubik", serif;
             position: absolute;
-            transform: translate(-50%, -50%);
             padding: 10px;
             background-color: rgba(255, 255, 255, 0.7);
             border-radius: 5px;
             text-align: center;
             cursor: pointer;
-            width: 130px;
+            width: 120px;
             height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .label img {
-            width: 130px;
-            height: 100px;
-            object-fit: contain;
+            line-height: 40px;
         }
 
         .label.matched {
@@ -79,12 +83,19 @@
             pointer-events: none;
         }
 
+        .label img {
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: 5px;
+        }
+
         #reveal-button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
 
-        
+
     </style>
 </head>
 <body>
@@ -94,7 +105,7 @@
         <p>Match the cranial nerve names to their correct positions on the anatomy diagram.</p>
         <p><strong>Steps:</strong></p>
         <ol>
-            <li>Drag a organ picture from the options on the left.</li>
+            <li>Drag a organ picture from the options on the right.</li>
             <li>Drop it onto the correct labeled position on the diagram.</li>
             <li>If the match is correct, the label will update with organ picture. If not, try again!</li>
         </ol>
@@ -102,8 +113,25 @@
     </div>
 
     <div id="game-container">
-        <!-- Organs Container -->
-        <div id="organs-container">
+        <div id="image-container">
+            <img src="cn-cn-pic/IMG_2883.PNG" alt="Cranial Nerves Anatomy">
+
+           <!-- Example labels -->
+           <div class="label" id="label-1" style="top: 10px; left: 450px;" data-match= "organ-1"></div>
+           <div class="label" id="label-2" style="top: 10px; left: 600px;" data-match= "organ-2"></div>
+           <div class="label" id="label-3" style="top: 100px; left: 270px;" data-match= "organ-3"></div>
+           <div class="label" id="label-5" style="top: 250px; left: 60px;" data-match= "organ-4"></div>
+           <div class="label" id="label-8" style="top: 450px; left: 130px;" data-match= "organ-5"></div>
+           <div class="label" id="label-11" style="top: 650px; left: 200px;" data-match= "organ-6"></div>
+           <div class="label" id="label-14" style="top: 800px; left: 490px;" data-match= "organ-7"></div>
+           <div class="label" id="label-15" style="top: 680px; right: 380px;" data-match= "organ-12"></div>
+           <div class="label" id="label-17" style="top: 600px; right: 130px;" data-match= "organ-8"></div>
+           <div class="label" id="label-18" style="top: 400px; right: 140px;" data-match= "organ-11"></div>
+           <div class="label" id="label-20" style="top: 210px; right: 120px;" data-match= "organ-9"></div>
+           <div class="label" id="label-21" style="top: 80px; right: 300px;" data-match= "organ-10"></div>
+        </div>
+
+        <div id="organs">
             <div class="organ" id="organ-1" draggable="true">
                 <img src="cn-cn-pic/IMG_2878.PNG" alt="eye">
                 <span>Eye</span>
@@ -140,45 +168,28 @@
                 <img src="cn-cn-pic/IMG_2859.PNG" alt="superior eye">
                <span>Superior oblique muscle</span>
             </div>
-            <div class="organ" id="organ-12" draggable="true">
-                <img src="cn-cn-pic/IMG_2871.PNG" alt="tongue">
-                <span>Muscles of the tongue</span>
+            <div class="organ" id="organ-10" draggable="true">
+                <img src="cn-cn-pic/IMG_2860.PNG" alt="all eye">
+                <span>All eye muscle except superior oblique muscle and lateral muscle</span>
             </div>
             <div class="organ" id="organ-11" draggable="true">
                 <img src="cn-cn-pic/IMG_2885.PNG" alt="soft palate">
                 <span>Muscles of the face, anterior part of tongue and soft palate</span>
             </div>
-            <div class="organ" id="organ-10" draggable="true">
-                <img src="cn-cn-pic/IMG_2860.PNG" alt="all eye">
-                <span>All eye muscle except superior oblique muscle and lateral muscle</span>
+            <div class="organ" id="organ-12" draggable="true">
+                <img src="cn-cn-pic/IMG_2871.PNG" alt="tongue">
+                <span>Muscles of the tongue</span>
             </div>
         </div>
 
-        <!-- Image Container -->
-        <div id="image-container">
-            <img src="cn-cn-pic/IMG_2883.PNG" alt="Cranial Nerves Anatomy">
-            <div class="label" id="label-1" style="top:180px; left: 470px;" data-match="organ-1"></div>           
-            <div class="label" id="label-2" style="top: 180px; left: 640px;" data-match="organ-2"></div>           
-            <div class="label" id="label-3" style="top: 280px; left: 300px;" data-match= "organ-3"></div>
-           <div class="label" id="label-4" style="top: 450px; left: 140px;" data-match= "organ-4"></div>
-           <div class="label" id="label-5" style="top: 600px; left: 200px;" data-match= "organ-5"></div>
-           <div class="label" id="label-6" style="top: 750px; left: 250px;" data-match= "organ-6"></div>
-           <div class="label" id="label-7" style="top: 920px; left: 470px;" data-match= "organ-7"></div>
-           <div class="label" id="label-8" style="top: 820px; right: 250px;" data-match= "organ-12"></div>
-           <div class="label" id="label-9" style="top: 740px; right: 60px;" data-match= "organ-8"></div>
-           <div class="label" id="label-10" style="top: 570px; right: 70px;" data-match= "organ-11"></div>
-           <div class="label" id="label-11" style="top: 420px; right: 50px;" data-match= "organ-9"></div>
-           <div class="label" id="label-12" style="top: 270px; right: 140px;" data-match= "organ-10"></div>
-        </div>
-    </div>
+        <button id="reveal-button">Answer</button>
 
-    <button id="reveal-button">Answer</button>
+    </div>
 
     <script>
         const labels = document.querySelectorAll('.label');
         const organs = document.querySelectorAll('.organ');
 
-        // Drag and drop functionality
         organs.forEach(organ => {
             organ.addEventListener('dragstart', e => {
                 e.dataTransfer.setData('text', e.target.id);
@@ -197,7 +208,7 @@
 
                 if (label.dataset.match === dragorgan.id) {
                     const organImg = dragorgan.querySelector('img').cloneNode(true);
-                    organImg.style.maxWidth = '130px';
+                    organImg.style.maxWidth = '100px';
                     organImg.style.maxHeight = '100px';
                     organImg.style.objectFit = 'contain';
 
@@ -205,7 +216,7 @@
                     label.appendChild(organImg);
                     label.classList.add('matched');
 
-                    dragorgan.style.display = 'none';
+                    dragorgan.setAttribute('draggable', 'false');
                 } else {
                     alert('Incorrect match. Try again!');
                 }
@@ -220,8 +231,8 @@
 
                 if (correctOrgan) {
                     const organImg = correctOrgan.querySelector('img').cloneNode(true);
-                    organImg.style.width = '130px';
-                    organImg.style.height = '110px';
+                    organImg.style.width = '100px';
+                    organImg.style.height = '100px';
                     organImg.style.objectFit = 'cover';
                     label.innerHTML = '';
                     label.appendChild(organImg);
@@ -237,6 +248,7 @@
             btn.disabled = true;
             btn.textContent = 'Answers Shown';
         });
+
     </script>
 </body>
 </html>
