@@ -1,10 +1,5 @@
 /* web page style */
 
-header {
-    background-color: #40A2E3;
-    color: #FFF6E9; 
-}
-
 .display-4 {
     font-weight: 550;
 }
@@ -30,7 +25,7 @@ footer {
 }
 
 .btn {
-    background-color: #40A2E3;
+    background-color: #4A628A;
     border: #40A2E3;
 }
 
@@ -40,25 +35,79 @@ footer {
 
 h2 {
     color: #4A628A;
+    font-weight: 600;
 }
 
 h3 {
     color: #7AB2D3;
+    font-weight: 500;
 }
 
 p {
     font-size: 20px;
 }
 
-.team {
-    font-size: 30px;
-    text-align: center;
-    font-family: 'Ubuntu', serif;
-    color: #4A628A;
+.lead {
+    font-size: 20px;
+    color: #0D9276;
+    font-weight: 400;
+}
+
+.display-5 {
+    font-size: 36px;
     font-weight: 500;
 }
 
-.team-name {
-    font-size: 18px;
-    font-family: 'Ubuntu', serif;
+h5 {
+    color: #40A2E3;
+}
+
+.subtitle {
+    color: #FFF6E9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header1 {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background-color: #4A628A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.logo {
+    color: antiquewhite;
+    text-decoration: none;
+    font-size: 55px;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.navbar a {
+    color: antiquewhite;
+    font-size: 20px;
+    text-decoration: none;
+    margin-left: 35px;
+    transition: .3s;
+}
+
+.navbar a:hover{
+    color: #7AB2D3;
+
+}
+
+html {
+    scroll-behavior: smooth;
 }

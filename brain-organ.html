@@ -18,13 +18,15 @@
             margin: 20px auto;
         }
 
+
+
         #organs-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            max-width: 300px;
-            padding: 10px;
-            margin-right: 20px;
+            /* max-width: 300px; */
+            /* padding: 10px;
+            margin-right: 20px; */
         }
 
         .organ {
@@ -34,16 +36,22 @@
             border-radius: 5px;
             cursor: pointer;
             padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 150px;
         }
 
         .organ img {
             width: 130px;
             height: 100px;
+            align-self: center;
         }
 
         #image-container {
             position: relative;
             max-width: 1200px;
+            z-index: 3;
         }
 
         #image-container img {
@@ -60,8 +68,8 @@
             border-radius: 5px;
             text-align: center;
             cursor: pointer;
-            width: 130px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -74,9 +82,10 @@
         }
 
         .label.matched {
-            background-color: #4CAF50;
-            color: white;
+            background-color: transparent;
+            border: none;
             pointer-events: none;
+            z-index: -1;
         }
 
         #reveal-button:disabled {
@@ -157,18 +166,18 @@
         <!-- Image Container -->
         <div id="image-container">
             <img src="cn-cn-pic/IMG_2883.PNG" alt="Cranial Nerves Anatomy">
-            <div class="label" id="label-1" style="top:180px; left: 470px;" data-match="organ-1"></div>           
-            <div class="label" id="label-2" style="top: 180px; left: 640px;" data-match="organ-2"></div>           
-            <div class="label" id="label-3" style="top: 280px; left: 300px;" data-match= "organ-3"></div>
-           <div class="label" id="label-4" style="top: 450px; left: 140px;" data-match= "organ-4"></div>
+            <div class="label" id="label-1" style="top: 170px; left: 490px;" data-match="organ-1"></div>           
+            <div class="label" id="label-2" style="top: 170px; left: 620px;" data-match="organ-2"></div>           
+            <div class="label" id="label-3" style="top: 250px; left: 330px;" data-match= "organ-3"></div>
+           <div class="label" id="label-4" style="top: 425px; left: 260px;" data-match= "organ-4"></div>
            <div class="label" id="label-5" style="top: 600px; left: 200px;" data-match= "organ-5"></div>
-           <div class="label" id="label-6" style="top: 750px; left: 250px;" data-match= "organ-6"></div>
-           <div class="label" id="label-7" style="top: 920px; left: 470px;" data-match= "organ-7"></div>
-           <div class="label" id="label-8" style="top: 820px; right: 250px;" data-match= "organ-12"></div>
-           <div class="label" id="label-9" style="top: 740px; right: 60px;" data-match= "organ-8"></div>
-           <div class="label" id="label-10" style="top: 570px; right: 70px;" data-match= "organ-11"></div>
-           <div class="label" id="label-11" style="top: 420px; right: 50px;" data-match= "organ-9"></div>
-           <div class="label" id="label-12" style="top: 270px; right: 140px;" data-match= "organ-10"></div>
+           <div class="label" id="label-6" style="top: 769px; left: 295px;" data-match= "organ-6"></div>
+           <div class="label" id="label-7" style="top: 850px; left: 510px;" data-match= "organ-7"></div>
+           <div class="label" id="label-8" style="top: 830px; right: 300px;" data-match= "organ-12"></div>
+           <div class="label" id="label-9" style="top: 690px; right: 150px;" data-match= "organ-8"></div>
+           <div class="label" id="label-10" style="top: 530px; right: 110px;" data-match= "organ-11"></div>
+           <div class="label" id="label-11" style="top: 320px; right: 120px;" data-match= "organ-9"></div>
+           <div class="label" id="label-12" style="top: 260px; right: 250px;" data-match= "organ-10"></div>
         </div>
     </div>
 
@@ -197,8 +206,26 @@
 
                 if (label.dataset.match === dragorgan.id) {
                     const organImg = dragorgan.querySelector('img').cloneNode(true);
-                    organImg.style.maxWidth = '130px';
-                    organImg.style.maxHeight = '100px';
+                    // organImg.style.width = 'auto';
+                    // organImg.style.height = '190px';
+                    // organImg.style.objectFit = 'contain';
+                    if (label.id === 'label-4') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "240px";
+                    } else if (label.id === 'label-6') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "255px";
+                    } else if (label.id === 'label-9') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "180px";
+                    } else if (label.id === 'label-10') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "200px";
+                    } else {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "150px";
+                    }
+
                     organImg.style.objectFit = 'contain';
 
                     label.innerHTML = '';
@@ -210,6 +237,7 @@
                     alert('Incorrect match. Try again!');
                 }
             });
+
         });
 
         // Show answers
@@ -220,9 +248,29 @@
 
                 if (correctOrgan) {
                     const organImg = correctOrgan.querySelector('img').cloneNode(true);
-                    organImg.style.width = '130px';
-                    organImg.style.height = '110px';
-                    organImg.style.objectFit = 'cover';
+                    // organImg.style.width = 'auto';
+                    // organImg.style.height = '190px';
+                    // organImg.style.objectFit = 'contain';
+
+                    if (label.id === 'label-4') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "240px";
+                    } else if (label.id === 'label-6') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "255px";
+                    } else if (label.id === 'label-9') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "180px";
+                    } else if (label.id === 'label-10') {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "200px";
+                    } else {
+                        organImg.style.width = "auto";
+                        organImg.style.height = "160px";
+                    }
+
+                    organImg.style.objectFit = 'contain';
+
                     label.innerHTML = '';
                     label.appendChild(organImg);
                     label.classList.add('matched');
