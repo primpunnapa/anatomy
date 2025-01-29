@@ -93,3 +93,19 @@ h1 {
     font-weight: bold;
     background-color: white;
 }
+
+#reset-btn {
+    font-family: "Rubik", serif;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #F4D160;
+    color: #1D5D9B;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
+}
+
+#reset-button:hover {
+    background-color: #F4D160;
+}
