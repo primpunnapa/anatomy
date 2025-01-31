@@ -19,7 +19,7 @@
 
     .container {
       max-width: 600px;
-      margin: 200px auto;
+      margin: 300px auto;
       padding: 20px;
       background: #fff;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -72,13 +72,37 @@
       display: none;
     }
 
+    #instructions {
+      font-family: "Rubik", serif;
+      background-color: #BBE2EC;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      max-width: 600px;
+      margin: 0 auto; 
+      font-size: 20px;
+      text-align: center;
+      position: absolute; /* Position at the top */
+      top: 0; /* Position at the top */
+      left: 50%; /* Center horizontally */
+      transform: translateX(-50%); /* Center horizontally */
+      width: 100%; /* Ensure it takes the full width */
+      box-sizing: border-box; /* Include padding in width calculation */
+    }
+
   </style>
 
 </head>
 <body>
+  <div id="instructions">
+    <p>Getting to know cranial nerve’s function by playing a flash card.</p>
+    <p>Just answer that belongs the questions.</p> 
+    <p>Good luck!</p>
+  </div>
+
   <div class="container">
     <h1 style="color: #0D9276;">Flashcard Game</h1>
-    <div id="timer" class="timer">30</div>
+    <div id="timer" class="timer">10</div>
     <div id="flashcard" class="flashcard">Question goes here</div>
     <div id="result" class="result"></div>
     <button id="answer-button" class="button">Answer</button>
@@ -118,7 +142,7 @@
     ];
 
     let currentIndex = 0;
-    let timer = 30; // set time 30 second
+    let timer = 10; // set time 30 second
     let countdown;
     let score = 0;
 
@@ -144,7 +168,15 @@
 
       } else {
         // show result
-        flashcardElement.textContent = "Game Over!";
+        flashcardElement.textContent = "Finish!";
+        let encouragingMessage = "";
+        if (score >= 18) {
+          encouragingMessage = "🎉 Amazing job! You're a cranial nerve expert! 🎉";
+        } else if (score >= 10 && score <= 17) {
+          encouragingMessage = "👍 Good effort! Keep practicing, and you'll master it! 👍";
+        } else {
+          encouragingMessage = "💪 Don't give up! Review the material and try again! 💪";
+        }
         resultElement.textContent = `Your final score is: ${score}/${flashcards.length}`;
         clearInterval(countdown); // stop counting
         timerElement.textContent = "0";
@@ -166,7 +198,7 @@
 
     // reckon time
     function startTimer() {
-      timer = 30;
+      timer = 10;
       timerElement.textContent = timer;
       clearInterval(countdown); // reset time
       countdown = setInterval(() => {
@@ -213,6 +245,14 @@
 
     function nextFlashcard() {
       currentIndex++;
+      if (currentIndex === 13) { // Check if the player has reached the 13th question
+        resultElement.textContent = "You're more than halfway there! Keep going! 💪";
+        resultElement.style.color = "#0D9276"; // Change text color for emphasis
+        setTimeout(() => {
+          resultElement.textContent = ""; // Clear the message after a few seconds
+          resultElement.style.color = "#ff4444"; // Reset text color
+        }, 3000); // Display the message for 3 seconds
+      }
       updateFlashcard();
       startTimer();
     }

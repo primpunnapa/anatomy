@@ -16,15 +16,9 @@
 <body>
     <h1>Cranial Nerves Matching Game</h1>
     <div id="instructions">
-        <h2>How to Play</h2>
-        <p>Match the cranial nerve names to their correct positions on the anatomy diagram.</p>
-        <p><strong>Steps:</strong></p>
-        <ol>
-            <li>Drag a cranial nerve name from the options on the right.</li>
-            <li>Drop it onto the correct labeled position on the diagram.</li>
-            <li>If the match is correct, the label will update with the nerve name. If not, try again!</li>
-        </ol>
-        <p>Match all the cranial nerves to complete the game. Good luck!</p>
+        <p>Learn the names and locations of cranial nerves by playing a matching game.</p>
+        <p>Simply click on a name box to select it, then click on the correct position on the anatomy diagram.</p>
+        <p style="text-align: center;">Good luck!</p>
     </div>
 
     <div id="game-container">
@@ -48,24 +42,27 @@
 
         <div id="options">
             <!-- Options for matching -->
-            <div class="option" draggable="true" id="option-1">Olfactory nerve</div>
-            <div class="option" draggable="true" id="option-2">Optic nerve</div>
-            <div class="option" draggable="true" id="option-3">Oculomotor nerve</div>
-            <div class="option" draggable="true" id="option-4">Trochlear nerve</div>
-            <div class="option" draggable="true" id="option-5">Trigeminal nerve</div>
-            <div class="option" draggable="true" id="option-6">Abducens nerve</div>
             <div class="option" draggable="true" id="option-7">Facial nerve</div>
+            <div class="option" draggable="true" id="option-5">Trigeminal nerve</div>
+            <div class="option" draggable="true" id="option-3">Oculomotor nerve</div>
             <div class="option" draggable="true" id="option-8">Vestibulocochlear nerve</div>
+            <div class="option" draggable="true" id="option-1">Olfactory nerve</div>
+            <div class="option" draggable="true" id="option-4">Trochlear nerve</div>
+            <div class="option" draggable="true" id="option-11">Accessory nerve</div>
+            <div class="option" draggable="true" id="option-6">Abducens nerve</div>
             <div class="option" draggable="true" id="option-9">Glossopharyngeal nerve</div>
             <div class="option" draggable="true" id="option-10">Vagus nerve</div>
-            <div class="option" draggable="true" id="option-11">Accessory nerve</div>
             <div class="option" draggable="true" id="option-12">Hypoglossal nerve</div>
+            <div class="option" draggable="true" id="option-2">Optic nerve</div>
+
         </div>
     </div>
 
-    <button id="reveal-button">Answer</button>
-    <button id="reset-btn" class="btn btn-danger mt-3">Reset Game</button>
-
+    <div id="button-container">
+        <button id="reveal-button" class="btn btn-primary">Answer</button>
+        <button id="reset-btn" class="btn btn-danger">Reset Game</button>
+    </div>
+    
     <!-- Link to external JS -->
     <script src="gamescript.js"></script>
 </body>

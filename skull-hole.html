@@ -14,15 +14,8 @@
 <body>
     <h1>Internal Aspect of Base of Skull Matching Game</h1>
     <div id="instructions">
-        <h2>How to Play</h2>
-        <p>Match the internal aspect of base of skull to their correct positions on the anatomy diagram.</p>
-        <p><strong>Steps:</strong></p>
-        <ol>
-            <li>Drag an internal aspect of base of skull name from the options on the right.</li>
-            <li>Drop it onto the correct labeled position on the diagram.</li>
-            <li>If the match is correct, the label will update with the internal aspect of base of skull name. If not, try again!</li>
-        </ol>
-        <p>Match all the internal aspect of base of skull to complete the game. Good luck!</p>
+        <p>Getting to know the internal aspects of the skull base by playing a matching game.</p>
+        <p>Click a name box, then click its correct spot on the diagram. Good luck!</p>
     </div>
 
     <div id="game-container">
@@ -67,52 +60,14 @@
 
         </div>
     </div>
-    <div id="result"></div>
 
-    <button id="reveal-button">Answer</button>
+    <div id="button-container">
+        <button id="reveal-button" class="btn btn-primary">Answer</button>
+        <button id="reset-btn" class="btn btn-danger">Reset Game</button>
+    </div>
 
-    <script>
-        const labels = document.querySelectorAll('.label');
-        const options = document.querySelectorAll('.option');
+    <!-- Link to external JS -->
+    <script src="gamescript.js"></script>
 
-        options.forEach(option => {
-            option.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text', e.target.id);
-            });
-        });
-
-        labels.forEach(label => {
-            label.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
-
-            label.addEventListener('drop', (e) => {
-                const draggedId = e.dataTransfer.getData('text');
-                const draggedOption = document.getElementById(draggedId);
-                
-                if (label.dataset.match === draggedOption.id) {
-                    label.textContent = draggedOption.textContent;
-                    label.classList.add('correct');
-                    draggedOption.style.display = 'none';
-                    
-                } else {
-                    alert('Incorrect match. Try again!');
-                }
-            });
-        });
-
-        // Reveal answers functionality
-        document.getElementById('reveal-button').addEventListener('click', () => {
-            labels.forEach(label => {
-                const matchId = label.dataset.match;
-                const option = document.getElementById(matchId);
-                if (option) {
-                    label.textContent = option.textContent;
-                    label.classList.add('correct');
-                    option.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>

@@ -29,6 +29,8 @@
             border-radius: 5px;
             max-width: 600px;
             margin-bottom: 20px;
+            font-size: 20px;
+            text-align: center;
         }
 
         #game-container {
@@ -91,19 +93,6 @@
             margin-top: 20px;
             font-size: 18px;
         }
-        svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .line {
-            stroke: #003285;
-            stroke-width: 2;
-        }
 
         #reveal-button {
             margin-top: 20px;
@@ -126,6 +115,42 @@
             font-weight: bold;
             background-color: white;
         }
+
+        #reset-btn {
+            font-family: "Rubik", serif;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #F4D160;
+            color: #1D5D9B;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #reset-button:hover {
+            background-color: #F4D160;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 10px;
+            margin-top: 20px; 
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
     </style>
 
      <!-- Link to Google font -->
@@ -137,34 +162,28 @@
 <body>
     <h1>Type of Cranial Nerves Matching Game</h1>
     <div id="instructions">
-        <h2>How to Play</h2>
-        <p>Match the type of cranial nerve to the correct cranial nerve.</p>
-        <p><strong>Steps:</strong></p>
-        <ol>
-            <li>Drag a type of cranial nerve from the options on the right.</li>
-            <li>Drop it onto the correct cranial nerve name.</li>
-            <li>If the match is correct, the label will update with the type of cranial nerve. If not, try again!</li>
-        </ol>
-        <p>Match all the type of cranial nerves to complete the game. Good luck!</p>
+        <p>Getting to know each cranial nerve’s type by playing a matching game.</p>
+        <p>Just click a name box, then click its correct cranial nerve.</p>
+        <p>Good luck!</p>
     </div>
     <div id="game-container">
 
-    <div id="cranial-nerve">
-        <!-- Options for matching -->
-        <div class="cn"  >Accessory nerve</div>
-        <div class="cn"  >Facial nerve</div>
-        <div class="cn"  >Glossopharyngeal nerve</div>
-        <div class="cn"  >Olfactory nerve</div>
-        <div class="cn"  >Trochlear nerve</div>
-        <div class="cn"  >Oculomotor nerve</div>
-        <div class="cn"  >Hypoglossal nerve</div>
-        <div class="cn"  >Optic nerve</div>
-        <div class="cn"  >Trigeminal nerve</div>
-        <div class="cn"  >Vestibulocochlear nerve</div>
-        <div class="cn"  >Vagus nerve</div>
-        <div class="cn"  >Abducens nerve</div>
+        <div id="cranial-nerve">
+            <!-- Options for matching -->
+            <div class="cn"  >Accessory nerve</div>
+            <div class="cn"  >Facial nerve</div>
+            <div class="cn"  >Glossopharyngeal nerve</div>
+            <div class="cn"  >Olfactory nerve</div>
+            <div class="cn"  >Trochlear nerve</div>
+            <div class="cn"  >Oculomotor nerve</div>
+            <div class="cn"  >Hypoglossal nerve</div>
+            <div class="cn"  >Optic nerve</div>
+            <div class="cn"  >Trigeminal nerve</div>
+            <div class="cn"  >Vestibulocochlear nerve</div>
+            <div class="cn"  >Vagus nerve</div>
+            <div class="cn"  >Abducens nerve</div>
 
-    </div>
+        </div>
 
     
         <div id="ans-box">
@@ -185,62 +204,80 @@
 
          <div id="options">
             <!-- Options for matching -->
-            <div class="option" draggable="true" id="option-1">Sensory</div>
-            
+            <div class="option" draggable="true" id="option-1">Sensory</div>  
             <div class="option" draggable="true" id="option-2">Motor</div>
-            
             <div class="option" draggable="true" id="option-3">Mixed</div>
-            
-    
         </div>
         
     </div>
-    <div id="result"></div>
 
-    <button id="reveal-button">Answer</button>
+    <div id="button-container">
+        <button id="reveal-button" class="btn btn-primary">Answer</button>
+        <button id="reset-btn" class="btn btn-danger">Reset Game</button>
+    </div>
 
     <script>
-        const labels = document.querySelectorAll('.label');
+        let selectedOption = null;
+
         const options = document.querySelectorAll('.option');
+        const labels = document.querySelectorAll('.label');
+        const resetButton = document.getElementById('reset-btn');
+        const revealButton = document.getElementById('reveal-button');
 
         options.forEach(option => {
-            option.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text', e.target.id);
+            option.addEventListener('click', () => {
+                // Highlight the selected option
+                options.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedOption = option;
             });
         });
 
         labels.forEach(label => {
-            label.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
+            label.addEventListener('click', () => {
+                if (selectedOption) {
+                    const matches = label.dataset.match.split(',').map(item => item.trim());
 
-            label.addEventListener('drop', (e) => {
-                const draggedId = e.dataTransfer.getData('text');
-                const draggedOption = document.getElementById(draggedId);
-                const label = e.target;
-                
-                
-                if (label.dataset.match === draggedOption.id) {
-                    label.textContent = draggedOption.textContent;
-                    label.style.backgroundColor = "#d0ffd0";
-                    
+                    if (matches.includes(selectedOption.id)) {
+                        label.textContent = selectedOption.textContent;
+                        label.classList.add('correct');
+                        selectedOption.classList.remove('selected'); // Keep the option reusable
+                    } else {
+                        alert('Incorrect match. Try again!');
+                    }
                 } else {
-                    alert('Incorrect match. Try again!');
+                    alert('Please select an option first.');
                 }
             });
         });
 
-        // Reveal answers functionality
-        document.getElementById('reveal-button').addEventListener('click', () => {
+        revealButton.addEventListener('click', () => {
             labels.forEach(label => {
-                const matchId = label.dataset.match;
-                const option = document.getElementById(matchId);
-                if (option) {
-                    label.textContent = option.textContent;
+                const matches = label.dataset.match.split(',').map(item => item.trim());
+                const correctOption = matches.find(matchId => {
+                    const option = document.getElementById(matchId);
+                    return option;
+                });
+
+                if (correctOption) {
+                    const optionElement = document.getElementById(correctOption);
+                    label.textContent = optionElement.textContent;
                     label.classList.add('correct');
-                    option.style.display = 'none';
                 }
             });
+        });
+
+        resetButton.addEventListener('click', () => {
+            labels.forEach(label => {
+                label.textContent = 'type of cranial nerve';
+                label.classList.remove('correct');
+            });
+
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            selectedOption = null;
         });
     </script>
 </body>

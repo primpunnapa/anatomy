@@ -50,15 +50,8 @@
 <body>
     <h1>Foramina/Canal Matching Game</h1>
     <div id="instructions">
-        <h2>How to Play</h2>
-        <p>Match the foramina/canal to the correct cranial nerve on the anatomy diagram.</p>
-        <p><strong>Steps:</strong></p>
-        <ol>
-            <li>Drag a foramina/canal and cranial nerve from the options on the right.</li>
-            <li>Drop it onto the correct labeled position on the diagram.</li>
-            <li>If the match is correct, the label will update with the  foramina/canal and cranial nerve. If not, try again!</li>
-        </ol>
-        <p>Match all the  foramina/canal and cranial nerves to complete the game. Good luck!</p>
+        <p>Learn how cranial nerves pass through the foramina at the base of the skull by playing a matching game.</p>
+        <p>Click on a cranial nerve or foramina box to select it, then click the corresponding box on the anatomy diagram to make a match.</p>
     </div>
 
     <div id="game-container">
@@ -127,64 +120,85 @@
         </div>
     </div>
 
-    <button id="reveal-button">Answer</button>
+    <div id="button-container">
+        <button id="reveal-button" class="btn btn-primary">Answers</button>
+        <button id="reset-btn" class="btn btn-danger">Reset</button>
+    </div>
     
     <script>
-        const labels = document.querySelectorAll('.label');
+        let selectedOption = null;
+
         const options = document.querySelectorAll('.option');
+        const labels = document.querySelectorAll('.label');
+        const resetButton = document.getElementById('reset-btn');
+        const revealButton = document.getElementById('reveal-button');
 
         options.forEach(option => {
-            option.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text', e.target.id);
+            option.addEventListener('click', () => {
+                // Highlight the selected option
+                options.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedOption = option;
             });
         });
 
         labels.forEach(label => {
-            label.addEventListener('dragover', (e) => {
-                e.preventDefault();
-            });
+            label.addEventListener('click', () => {
+                if (selectedOption) {
+                    const matches = label.dataset.match.split(',').map(item => item.trim());
 
-            label.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const draggedId = e.dataTransfer.getData('text');
-                const draggedOption = document.getElementById(draggedId);
-
-                // separate data-match into array
-                const matches = label.dataset.match.split(',').map(item => item.trim());
-
-                // check draggedId in matches
-                if (matches.includes(draggedId)) {
-                    label.textContent = draggedOption.textContent;
-                    label.classList.add('correct'); 
-                    draggedOption.style.display = 'none';
+                    if (matches.includes(selectedOption.id)) {
+                        label.textContent = selectedOption.textContent;
+                        label.classList.add('correct');
+                        selectedOption.style.display = 'none';
+                        selectedOption = null; // Reset selected option
+                    } else {
+                        alert('Incorrect match. Try again!');
+                    }
                 } else {
-                    alert('Incorrect match. Try again!');
+                    alert('Please select an option first.');
                 }
             });
         });
 
-        // Reveal answers functionality
-        document.getElementById('reveal-button').addEventListener('click', () => {
+        revealButton.addEventListener('click', () => {
             labels.forEach(label => {
                 const matches = label.dataset.match.split(',').map(item => item.trim());
-
-                // filter matches only the one that has not hided
-                const availableOptions = matches.filter(matchId => {
+                const correctOption = matches.find(matchId => {
                     const option = document.getElementById(matchId);
-                    return option && getComputedStyle(option).display !== 'none'; // check if we can see the option
+                    return option && option.style.display !== 'none';
                 });
 
-                // random the options if still it still has
-                if (availableOptions.length > 0) {
-                    const randomMatch = availableOptions[Math.floor(Math.random() * availableOptions.length)];
-                    const option = document.getElementById(randomMatch);
-                    label.textContent = option.textContent;
-                    label.classList.add('correct'); // change color to be green
-                    option.style.display = 'none';
+                if (correctOption) {
+                    const optionElement = document.getElementById(correctOption);
+                    label.textContent = optionElement.textContent;
+                    label.classList.add('correct');
+                    optionElement.style.display = 'none';
                 }
             });
         });
 
+        resetButton.addEventListener('click', () => {
+            labels.forEach(label => {
+                // Check the ID of each label to reset text based on the range
+                if (label.id.startsWith('label-') && parseInt(label.id.split('-')[1]) <= 8) {
+                    label.textContent = 'foramina/canal';
+                } else {
+                    label.textContent = 'cranial nerves';
+                }
+                label.classList.remove('correct'); // Remove 'correct' class
+            });
+
+            options.forEach(option => {
+                // Only reset unmatched options
+                if (!option.classList.contains('matched')) {
+                    option.style.display = 'block';
+                }
+                option.classList.remove('selected');
+            });
+
+            selectedOption = null;
+        });
 
     </script>
 </body>
