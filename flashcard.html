@@ -75,19 +75,17 @@
     #instructions {
       font-family: "Rubik", serif;
       background-color: #BBE2EC;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      max-width: 600px;
-      margin: 0 auto; 
+      padding: 15px 20px;
+      border-radius: 8px;
       font-size: 20px;
       text-align: center;
-      position: absolute; /* Position at the top */
-      top: 0; /* Position at the top */
-      left: 50%; /* Center horizontally */
-      transform: translateX(-50%); /* Center horizontally */
-      width: 100%; /* Ensure it takes the full width */
-      box-sizing: border-box; /* Include padding in width calculation */
+      width: 80%;
+      max-width: 600px;
+      position: fixed; /* Stays at the top */
+      top: 10px; 
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     }
 
   </style>
@@ -142,7 +140,7 @@
     ];
 
     let currentIndex = 0;
-    let timer = 10; // set time 30 second
+    let timer = 10; // set time 10 second
     let countdown;
     let score = 0;
 
@@ -158,33 +156,42 @@
 
     function updateFlashcard() {
       if (currentIndex < flashcards.length) {
-        flashcardElement.textContent = flashcards[currentIndex].question;
-        resultElement.textContent = "";
-        answerButton.style.display = "inline-block"; // show answer button
-        correctButton.style.display = "none"; // hide Correct button
-        wrongButton.style.display = "none"; // hide Wrong button
-        nextButton.style.display = "none"; // hide Next button
-        timerElement.classList.remove("hidden");
-
+          // Show new question
+          flashcardElement.textContent = flashcards[currentIndex].question;
+          resultElement.textContent = ""; // Clear previous results
+          answerButton.style.display = "inline-block"; // Show Answer button
+          correctButton.style.display = "none"; // Hide Correct button
+          wrongButton.style.display = "none"; // Hide Wrong button
+          nextButton.style.display = "none"; // Hide Next button
+          timerElement.classList.remove("hidden"); // Show timer
       } else {
-        // show result
-        flashcardElement.textContent = "Finish!";
-        let encouragingMessage = "";
-        if (score >= 18) {
-          encouragingMessage = "🎉 Amazing job! You're a cranial nerve expert! 🎉";
-        } else if (score >= 10 && score <= 17) {
-          encouragingMessage = "👍 Good effort! Keep practicing, and you'll master it! 👍";
-        } else {
-          encouragingMessage = "💪 Don't give up! Review the material and try again! 💪";
-        }
-        resultElement.textContent = `Your final score is: ${score}/${flashcards.length}`;
-        clearInterval(countdown); // stop counting
-        timerElement.textContent = "0";
-        answerButton.style.display = "none";
-        correctButton.style.display = "none";
-        wrongButton.style.display = "none";
-        nextButton.style.display = "none";
-        timerElement.classList.add("hidden");
+          // End of game - Show result
+          flashcardElement.textContent = "🎯 Finish! 🎯";
+
+          let encouragingMessage = "";
+          if (score >= 18) {
+              encouragingMessage = "🎉 Amazing job! You're a cranial nerve expert! 🎉";
+          } else if (score >= 10 && score <= 17) {
+              encouragingMessage = "👍 Good effort! Keep practicing, and you'll master it! 👍";
+          } else {
+              encouragingMessage = "💪 Don't give up! Review the material and try again! 💪";
+          }
+
+          // Display final score + encouraging message
+          resultElement.innerHTML = `Your final score is: <strong>${score}/${flashcards.length}</strong><br>${encouragingMessage}`;
+          // flashcardElement.innerHTML = `Your final score is: <strong>${score}/${flashcards.length}</strong><br>${encouragingMessage}`;
+
+
+          // Stop the timer
+          clearInterval(countdown);
+          timerElement.textContent = "0";
+          timerElement.classList.add("hidden"); // Hide timer
+
+          // Hide all buttons
+          answerButton.style.display = "none";
+          correctButton.style.display = "none";
+          wrongButton.style.display = "none";
+          nextButton.style.display = "none";
       }
     }
 
