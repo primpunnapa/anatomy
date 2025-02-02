@@ -93,13 +93,50 @@
             cursor: not-allowed;
         }
 
+        #reset-button {
+            font-family: "Rubik", serif;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #F4D160;
+            color: #1D5D9B;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #reset-button:hover {
+            background-color: #F4D160;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 10px;
+            margin-top: 20px; 
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+
         
     </style>
 </head>
 <body>
     <h1>Cranial Nerves Matching Game</h1>
     <div id="instructions">
-        <p>Getting to know the cranial nerve's control by playing a matching game. Just drag and drop the target organ image in the correct position on the anatomy diagram.
+        <p>Getting to know the cranial nerve's control by playing a matching game.</p>
+        <p>Click to select an organ and then place it in the correct position on the anatomy diagram</p>
         <p>Good luck!</p>
     </div>
 
@@ -174,63 +211,75 @@
         </div>
     </div>
 
-    <button id="reveal-button">Answer</button>
+    <div id="button-container">
+        <button id="reveal-button" class="btn btn-primary">Answer</button>
+        <button id="reset-button" class="btn btn-danger">Reset</button>
+    </div>
+    
 
     <script>
         const labels = document.querySelectorAll('.label');
         const organs = document.querySelectorAll('.organ');
+        const btn1 = document.getElementById('reveal-button');
+        const btn2 = document.getElementById('reset-button');
+        let selectedOrgan = null;
 
-        // Drag and drop functionality
+        // click
         organs.forEach(organ => {
-            organ.addEventListener('dragstart', e => {
-                e.dataTransfer.setData('text', e.target.id);
+            organ.addEventListener('click', () => {
+                if (!organ.classList.contains('matched')) {
+                    selectedOrgan = organ;
+                    organs.forEach(o => o.classList.remove('selected'));
+                    organ.classList.add('selected');
+                }
             });
         });
 
         labels.forEach(label => {
-            label.addEventListener('dragover', e => {
-                e.preventDefault();
-            });
-
-            label.addEventListener('drop', e => {
-                e.preventDefault();
-                const draggedId = e.dataTransfer.getData('text');
-                const dragorgan = document.getElementById(draggedId);
-
-                if (label.dataset.match === dragorgan.id) {
-                    const organImg = dragorgan.querySelector('img').cloneNode(true);
-                    // organImg.style.width = 'auto';
-                    // organImg.style.height = '190px';
-                    // organImg.style.objectFit = 'contain';
+            label.addEventListener('click', () => {
+                if (selectedOrgan && label.dataset.match === selectedOrgan.id) {
+                    const organImg = selectedOrgan.querySelector('img').cloneNode(true);
+                    
                     if (label.id === 'label-4') {
-                        organImg.style.width = "auto";
                         organImg.style.height = "240px";
                     } else if (label.id === 'label-6') {
-                        organImg.style.width = "auto";
                         organImg.style.height = "255px";
                     } else if (label.id === 'label-9') {
-                        organImg.style.width = "auto";
                         organImg.style.height = "180px";
                     } else if (label.id === 'label-10') {
-                        organImg.style.width = "auto";
                         organImg.style.height = "200px";
                     } else {
-                        organImg.style.width = "auto";
                         organImg.style.height = "150px";
                     }
-
+                    organImg.style.width = "auto";
                     organImg.style.objectFit = 'contain';
 
                     label.innerHTML = '';
                     label.appendChild(organImg);
                     label.classList.add('matched');
 
-                    dragorgan.style.display = 'none';
-                } else {
+                    selectedOrgan.classList.add('matched');
+                    selectedOrgan.style.display = 'none';
+                    selectedOrgan = null;
+                } else if (selectedOrgan) {
                     alert('Incorrect match. Try again!');
                 }
             });
+        });
 
+        // Reset
+        document.getElementById('reset-button').addEventListener('click', () => {
+            labels.forEach(label => {
+                label.innerHTML = '';
+                label.classList.remove('matched');
+            });
+
+            organs.forEach(organ => {
+                organ.style.display = 'flex';
+                organ.classList.remove('matched', 'selected');
+            });
+
+            selectedOrgan = null;
         });
 
         // Show answers
@@ -241,9 +290,6 @@
 
                 if (correctOrgan) {
                     const organImg = correctOrgan.querySelector('img').cloneNode(true);
-                    // organImg.style.width = 'auto';
-                    // organImg.style.height = '190px';
-                    // organImg.style.objectFit = 'contain';
 
                     if (label.id === 'label-4') {
                         organImg.style.width = "auto";
@@ -270,13 +316,6 @@
                 }
             });
 
-            organs.forEach(organ => {
-                organ.setAttribute('draggable', 'false');
-            });
-
-            const btn = document.getElementById('reveal-button');
-            btn.disabled = true;
-            btn.textContent = 'Answers Shown';
         });
     </script>
 </body>
