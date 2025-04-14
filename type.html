@@ -167,6 +167,14 @@
             background-color: #F75A5A;
         }
 
+        #timer, #stars {
+            font-family: "Rubik", serif;
+            font-size: 18px;
+            margin-top: 5px;
+            color: #333;
+        }
+
+
     </style>
 
      <!-- Link to Google font -->
@@ -182,6 +190,10 @@
         <p>Just click a name box, then click its correct cranial nerve.</p>
         <p>Good luck!</p>
     </div>
+
+    <div id="timer">⏱ Time: 0s</div>
+    <div id="stars">⭐️⭐️⭐️</div>
+
     <div id="game-container">
 
         <div id="cranial-nerve">
@@ -233,6 +245,7 @@
         <a id="next" href="flashcard.html" class="btn btn-success">Next Game</a>
     </div>
 
+
     <script>
         let selectedOption = null;
 
@@ -250,15 +263,28 @@
             });
         });
 
+        function checkAllMatched() {
+            const allMatched = Array.from(labels).every(label => label.classList.contains('correct'));
+            if (allMatched && gameStarted) {
+                const finalTime = stopTimer();
+                updateStars(finalTime);
+            }
+        }
+
+
         labels.forEach(label => {
             label.addEventListener('click', () => {
+                if (!gameStarted) startTimer();
+
                 if (selectedOption) {
                     const matches = label.dataset.match.split(',').map(item => item.trim());
 
                     if (matches.includes(selectedOption.id)) {
                         label.textContent = selectedOption.textContent;
                         label.classList.add('correct');
-                        selectedOption.classList.remove('selected'); // Keep the option reusable
+                        selectedOption.classList.remove('selected');
+
+                        checkAllMatched(); // ✅ ตรวจจบเกม
                     } else {
                         alert('Incorrect match. Try again!');
                     }
@@ -267,6 +293,7 @@
                 }
             });
         });
+
 
         revealButton.addEventListener('click', () => {
             labels.forEach(label => {
@@ -282,6 +309,11 @@
                     label.classList.add('correct');
                 }
             });
+
+            if (gameStarted) {
+                const finalTime = stopTimer();
+                updateStars(finalTime);
+            }
         });
 
         resetButton.addEventListener('click', () => {
@@ -295,7 +327,44 @@
             });
 
             selectedOption = null;
+
+            clearInterval(timerInterval);
+            document.getElementById('timer').textContent = "⏱ Time: 0s";
+            document.getElementById('stars').textContent = "⭐️⭐️⭐️";
+            timeElapsed = 0;
+            gameStarted = false;
         });
+
+
+        let timerInterval;
+        let timeElapsed = 0;
+        let gameStarted = false;
+
+        function startTimer() {
+            timeElapsed = 0;
+            gameStarted = true;
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                document.getElementById('timer').textContent = `⏱ Time: ${timeElapsed}s`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            gameStarted = false;
+            return timeElapsed;
+        }
+
+        function updateStars(seconds) {
+            let stars = "⭐️⭐️⭐️";
+            if (seconds > 45) {
+                stars = "⭐️";
+            } else if (seconds > 30) {
+                stars = "⭐️⭐️";
+            }
+            document.getElementById('stars').textContent = stars;
+        }
+
     </script>
 </body>
 </html>

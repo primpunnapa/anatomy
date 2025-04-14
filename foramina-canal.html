@@ -120,6 +120,11 @@
         </div>
     </div>
 
+    <div id="status-container" style="text-align: center; margin: 20px 0;">
+        <p id="timer">⏱ Time: 0s</p>
+        <p id="stars">⭐️⭐️⭐️</p>
+    </div>
+    
     <div id="button-container">
         <button id="reveal-button" class="btn btn-primary">Answer</button>
         <button id="reset-btn" class="btn btn-danger">Reset</button>
@@ -127,6 +132,40 @@
     </div>
     
     <script>
+        let startTime;
+        let timerInterval;
+        let totalCorrect = 0;
+        const totalLabels = 22;
+        let gameStarted = false;
+
+        function startTimer() {
+            if (!gameStarted) {
+                gameStarted = true;
+                startTime = Date.now();
+                timerInterval = setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                    document.getElementById('timer').textContent = `⏱ Time: ${elapsed}s`;
+                }, 1000);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            return timeTaken;
+        }
+
+        function updateStars(seconds) {
+            const starElement = document.getElementById('stars');
+            if (seconds <= 30) {
+                starElement.textContent = "⭐️⭐️⭐️";
+            } else if (seconds <= 60) {
+                starElement.textContent = "⭐️⭐️";
+            } else {
+                starElement.textContent = "⭐️";
+            }
+        }
+
         let selectedOption = null;
 
         const options = document.querySelectorAll('.option');
@@ -152,12 +191,17 @@
                         label.textContent = selectedOption.textContent;
                         label.classList.add('correct');
                         selectedOption.style.display = 'none';
-                        selectedOption = null; // Reset selected option
-                    } else {
-                        alert('Incorrect match. Try again!');
+                        selectedOption = null;
+
+                        totalCorrect++;
+                        startTimer();
+
+                        if (totalCorrect === totalLabels) {
+                            const finalTime = stopTimer();
+                            updateStars(finalTime);
+                            alert(`🎉 You matched all items in ${finalTime} seconds!`);
+                        }
                     }
-                } else {
-                    alert('Please select an option first.');
                 }
             });
         });
@@ -177,6 +221,11 @@
                     optionElement.style.display = 'none';
                 }
             });
+
+            if (gameStarted) {
+                const finalTime = stopTimer();
+                updateStars(finalTime);
+            }
         });
 
         resetButton.addEventListener('click', () => {
@@ -188,6 +237,13 @@
                     label.textContent = 'cranial nerves';
                 }
                 label.classList.remove('correct'); // Remove 'correct' class
+
+                clearInterval(timerInterval);
+                document.getElementById('timer').textContent = "⏱ Time: 0s";
+                document.getElementById('stars').textContent = "⭐️⭐️⭐️";
+                gameStarted = false;
+                totalCorrect = 0;
+
             });
 
             options.forEach(option => {
