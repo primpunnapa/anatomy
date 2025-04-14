@@ -151,6 +151,22 @@
             transform: scale(0.98);
         }
 
+        #next {
+            font-family: "Rubik", serif;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #F75A5A;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #next:hover {
+            background-color: #F75A5A;
+        }
+
     </style>
 
      <!-- Link to Google font -->
@@ -213,7 +229,8 @@
 
     <div id="button-container">
         <button id="reveal-button" class="btn btn-primary">Answer</button>
-        <button id="reset-btn" class="btn btn-danger">Reset Game</button>
+        <button id="reset-btn" class="btn btn-danger">Reset</button>
+        <a id="next" href="flashcard.html" class="btn btn-success">Next Game</a>
     </div>
 
     <script>
