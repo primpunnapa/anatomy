@@ -213,7 +213,7 @@
 
     <div id="button-container">
         <button id="reveal-button" class="btn btn-primary">Answer</button>
-        <button id="reset-btn" class="btn btn-danger">Reset</button>
+        <button id="reset-button" class="btn btn-danger">Reset</button>
         <a id="next" href="skull-cn.html" class="btn btn-success">Next Game</a>
     </div>
     
@@ -281,6 +281,7 @@
             });
 
             selectedOrgan = null;
+            document.getElementById('reveal-button').disabled = false;
         });
 
         // Show answers
@@ -316,6 +317,7 @@
                     label.classList.add('matched');
                 }
             });
+            document.getElementById('reveal-button').disabled = true;
 
         });
     </script>
