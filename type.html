@@ -15,6 +15,10 @@
             padding: 0;
         }
 
+        .hidden {
+            display: none;
+        }
+
         h1 {
             color: #0D9276;
             font-family: "Rubik", serif;
@@ -134,9 +138,9 @@
 
         #button-container {
             display: flex;
-            justify-content: center; 
+            justify-content: center;
             gap: 10px;
-            margin-top: 20px; 
+            margin-top: 20px;
         }
 
         button {
@@ -177,11 +181,10 @@
 
     </style>
 
-     <!-- Link to Google font -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900" rel="stylesheet">
- 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900" rel="stylesheet">
+
 </head>
 <body>
     <h1>Type of Cranial Nerves Matching Game</h1>
@@ -192,12 +195,11 @@
     </div>
 
     <div id="timer">⏱ Time: 0s</div>
-    <div id="stars">⭐️⭐️⭐️</div>
+    <a id="stars" class="button hidden">Stars</a>
 
     <div id="game-container">
 
         <div id="cranial-nerve">
-            <!-- Options for matching -->
             <div class="cn"  >Accessory nerve</div>
             <div class="cn"  >Facial nerve</div>
             <div class="cn"  >Glossopharyngeal nerve</div>
@@ -213,9 +215,8 @@
 
         </div>
 
-    
+
         <div id="ans-box">
-            <!-- Example labels -->
             <div class="label" id="label-1" data-match= "option-2">type of cranial nerve</div>
             <div class="label" id="label-2" data-match= "option-3">type of cranial nerve</div>
             <div class="label" id="label-3" data-match= "option-3">type of cranial nerve</div>
@@ -225,18 +226,17 @@
             <div class="label" id="label-7" data-match= "option-2">type of cranial nerve</div>
             <div class="label" id="label-8" data-match= "option-1">type of cranial nerve</div>
             <div class="label" id="label-9" data-match= "option-3">type of cranial nerve</div>
-            <div class="label" id="label-10" data-match= "option-1">type of cranial nerve</div> 
+            <div class="label" id="label-10" data-match= "option-1">type of cranial nerve</div>
             <div class="label" id="label-11" data-match= "option-3">type of cranial nerve</div>
             <div class="label" id="label-12" data-match= "option-2">type of cranial nerve</div>
-         </div>
+        </div>
 
-         <div id="options">
-            <!-- Options for matching -->
-            <div class="option" draggable="true" id="option-1">Sensory</div>  
+        <div id="options">
+            <div class="option" draggable="true" id="option-1">Sensory</div>
             <div class="option" draggable="true" id="option-2">Motor</div>
             <div class="option" draggable="true" id="option-3">Mixed</div>
         </div>
-        
+
     </div>
 
     <div id="button-container">
@@ -248,34 +248,39 @@
 
     <script>
         let selectedOption = null;
+        let totalCorrect = 0;
+        const totalLabels = document.querySelectorAll('.label').length; // ดึงจำนวน labels ทั้งหมด
 
         const options = document.querySelectorAll('.option');
         const labels = document.querySelectorAll('.label');
         const resetButton = document.getElementById('reset-btn');
         const revealButton = document.getElementById('reveal-button');
+        const starsButton = document.getElementById('stars');
+        let timerInterval;
+        let timeElapsed = 0;
+        let gameStarted = false;
 
         options.forEach(option => {
             option.addEventListener('click', () => {
-                // Highlight the selected option
                 options.forEach(opt => opt.classList.remove('selected'));
                 option.classList.add('selected');
                 selectedOption = option;
+                if (!gameStarted && selectedOption) startTimer(); // เริ่ม timer เมื่อมีการเลือกครั้งแรก
             });
         });
 
         function checkAllMatched() {
-            const allMatched = Array.from(labels).every(label => label.classList.contains('correct'));
-            if (allMatched && gameStarted) {
+            if (totalCorrect === totalLabels && gameStarted) {
                 const finalTime = stopTimer();
                 updateStars(finalTime);
+                starsButton.classList.remove('hidden');
+                alert(`🎉 Well done! You finished in ${finalTime} seconds.`);
             }
         }
 
 
         labels.forEach(label => {
             label.addEventListener('click', () => {
-                if (!gameStarted) startTimer();
-
                 if (selectedOption) {
                     const matches = label.dataset.match.split(',').map(item => item.trim());
 
@@ -283,8 +288,8 @@
                         label.textContent = selectedOption.textContent;
                         label.classList.add('correct');
                         selectedOption.classList.remove('selected');
-
-                        checkAllMatched(); // ✅ ตรวจจบเกม
+                        totalCorrect++; // ✅ อัปเดต totalCorrect เมื่อจับคู่ถูกต้อง
+                        checkAllMatched(); // ✅ ตรวจสอบเมื่อมีการจับคู่
                     } else {
                         alert('Incorrect match. Try again!');
                     }
@@ -298,21 +303,22 @@
         revealButton.addEventListener('click', () => {
             labels.forEach(label => {
                 const matches = label.dataset.match.split(',').map(item => item.trim());
-                const correctOption = matches.find(matchId => {
-                    const option = document.getElementById(matchId);
-                    return option;
-                });
+                const correctOption = matches.find(matchId => document.getElementById(matchId));
 
-                if (correctOption) {
+                if (correctOption && !label.classList.contains('correct')) { // แสดงคำตอบเฉพาะที่ยังไม่ถูก
                     const optionElement = document.getElementById(correctOption);
                     label.textContent = optionElement.textContent;
                     label.classList.add('correct');
+                    totalCorrect++; // อัปเดต totalCorrect เมื่อเฉลย
                 }
+                label.dataset.revealed = true; // Mark as revealed
             });
 
             if (gameStarted) {
                 const finalTime = stopTimer();
                 updateStars(finalTime);
+                starsButton.classList.remove('hidden');
+                alert(`💡 Here are the answers. You finished in ${finalTime} seconds.`);
             }
         });
 
@@ -320,6 +326,7 @@
             labels.forEach(label => {
                 label.textContent = 'type of cranial nerve';
                 label.classList.remove('correct');
+                delete label.dataset.revealed;
             });
 
             options.forEach(option => {
@@ -327,18 +334,15 @@
             });
 
             selectedOption = null;
-
             clearInterval(timerInterval);
             document.getElementById('timer').textContent = "⏱ Time: 0s";
-            document.getElementById('stars').textContent = "⭐️⭐️⭐️";
-            timeElapsed = 0;
+            starsButton.innerHTML = "Stars";
+            starsButton.classList.add('hidden');
             gameStarted = false;
+            totalCorrect = 0;
+            timeElapsed = 0;
         });
 
-
-        let timerInterval;
-        let timeElapsed = 0;
-        let gameStarted = false;
 
         function startTimer() {
             timeElapsed = 0;
@@ -356,13 +360,14 @@
         }
 
         function updateStars(seconds) {
-            let stars = "⭐️⭐️⭐️";
-            if (seconds > 45) {
-                stars = "⭐️";
-            } else if (seconds > 30) {
-                stars = "⭐️⭐️";
+            const starElement = document.getElementById('stars');
+            if (seconds <= 30) {
+                starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApmfX.jpeg" alt="3 stars" width="150" height="150">';
+            } else if (seconds <= 120) {
+                starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApWHO.jpeg" alt="2 stars" width="150" height="150">';
+            } else {
+                starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApZuD.jpeg" alt="1 star" width="150" height="150">';
             }
-            document.getElementById('stars').textContent = stars;
         }
 
     </script>

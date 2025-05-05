@@ -2,7 +2,7 @@ let selectedOption = null;
 let startTime;
 let timerInterval;
 let totalCorrect = 0;
-const totalLabels = 12;
+const totalLabels = 16;
 let gameStarted = false;
 
 const options = document.querySelectorAll('.option');
@@ -29,12 +29,13 @@ function stopTimer() {
 function updateStars(seconds) {
     const starElement = document.getElementById('stars');
     if (seconds <= 30) {
-        starElement.textContent = "⭐️⭐️⭐️";
-    } else if (seconds <= 60) {
-        starElement.textContent = "⭐️⭐️";
+        starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApmfX.jpeg" alt="3 stars" width="150" height="150">';
+    } else if (seconds <= 120) {
+        starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApWHO.jpeg" alt="2 stars" width="150" height="150">';
     } else {
-        starElement.textContent = "⭐️";
+        starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApZuD.jpeg" alt="1 star" width="150" height="150">';
     }
+
 }
 
 // Handle option clicks
@@ -70,6 +71,8 @@ labels.forEach(label => {
                 const finalTime = stopTimer();
                 updateStars(finalTime);
                 alert(`🎉 Well done! You finished in ${finalTime} seconds.`);
+                const starsButton = document.getElementById('stars');
+                starsButton.classList.remove('hidden');
             }
         } else {
             alert('Incorrect match. Try again!');
@@ -110,7 +113,10 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 
     clearInterval(timerInterval);
     document.getElementById('timer').textContent = "Time: 0s";
-    document.getElementById('stars').textContent = "⭐️⭐️⭐️";
+    document.getElementById('stars').textContent = "Stars";
     gameStarted = false;
     totalCorrect = 0;
+    const starsButton = document.getElementById('stars');
+    starsButton.classList.add('hidden');
+    
 });

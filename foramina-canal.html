@@ -122,7 +122,7 @@
 
     <div id="status-container" style="text-align: center; margin: 20px 0;">
         <p id="timer">⏱ Time: 0s</p>
-        <p id="stars">⭐️⭐️⭐️</p>
+        <a id="stars" class="button hidden">Stars</a>
     </div>
     
     <div id="button-container">
@@ -157,13 +157,13 @@
 
         function updateStars(seconds) {
             const starElement = document.getElementById('stars');
-            if (seconds <= 30) {
-                starElement.textContent = "⭐️⭐️⭐️";
-            } else if (seconds <= 60) {
-                starElement.textContent = "⭐️⭐️";
-            } else {
-                starElement.textContent = "⭐️";
-            }
+    if (seconds <= 30) {
+        starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApmfX.jpeg" alt="3 stars" width="150" height="150">';
+    } else if (seconds <= 120) {
+        starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApWHO.jpeg" alt="2 stars" width="150" height="150">';
+    } else {
+        starElement.innerHTML = '<img src="https://sv1.img.in.th/7ApZuD.jpeg" alt="1 star" width="150" height="150">';
+    }
         }
 
         let selectedOption = null;
@@ -200,6 +200,8 @@
                             const finalTime = stopTimer();
                             updateStars(finalTime);
                             alert(`🎉 You matched all items in ${finalTime} seconds!`);
+                            const starsButton = document.getElementById('stars');
+                            starsButton.classList.remove('hidden');
                         }
                     }
                 }
@@ -240,9 +242,11 @@
 
                 clearInterval(timerInterval);
                 document.getElementById('timer').textContent = "⏱ Time: 0s";
-                document.getElementById('stars').textContent = "⭐️⭐️⭐️";
+                document.getElementById('stars').textContent = "Stars";
                 gameStarted = false;
                 totalCorrect = 0;
+                const starsButton = document.getElementById('stars');
+                starsButton.classList.add('hidden');
 
             });
 

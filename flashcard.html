@@ -107,6 +107,7 @@
     <button id="correct-button" class="button" style="display: none; background-color: green">Correct</button>
     <button id="wrong-button" class="button" style="display: none; background-color: red;">Wrong</button>
     <button id="next-button" class="button" style="display: none;">Next</button>
+    <a id="next-game-button" href="index.html" class="button hidden">Back to Home</a>
   </div>
 
   <script>
@@ -164,36 +165,39 @@
           wrongButton.style.display = "none"; // Hide Wrong button
           nextButton.style.display = "none"; // Hide Next button
           timerElement.classList.remove("hidden"); // Show timer
-      } else {
-          // End of game - Show result
-          flashcardElement.textContent = "🎯 Finish! 🎯";
+        } else {
+        // End of game - Show result
+        flashcardElement.textContent = "🎯 Finish! 🎯";
 
-          let encouragingMessage = "";
-          if (score >= 18) {
-              encouragingMessage = "🎉 Amazing job! You're a cranial nerve expert! 🎉";
-          } else if (score >= 10 && score <= 17) {
-              encouragingMessage = "👍 Good effort! Keep practicing, and you'll master it! 👍";
-          } else {
-              encouragingMessage = "💪 Don't give up! Review the material and try again! 💪";
-          }
+        let encouragingMessage = "";
+        if (score >= 18) {
+            encouragingMessage = "🎉 Amazing job! You're a cranial nerve expert! 🎉";
+        } else if (score >= 10 && score <= 17) {
+            encouragingMessage = "👍 Good effort! Keep practicing, and you'll master it! 👍";
+        } else {
+            encouragingMessage = "💪 Don't give up! Review the material and try again! 💪";
+        }
 
-          // Display final score + encouraging message
-          resultElement.innerHTML = `Your final score is: <strong>${score}/${flashcards.length}</strong><br>${encouragingMessage}`;
-          // flashcardElement.innerHTML = `Your final score is: <strong>${score}/${flashcards.length}</strong><br>${encouragingMessage}`;
+        // Display final score + encouraging message
+        resultElement.innerHTML = `Your final score is: <strong>${score}/${flashcards.length}</strong><br>${encouragingMessage}`;
+        // flashcardElement.innerHTML = `Your final score is: <strong>${score}/${flashcards.length}</strong><br>${encouragingMessage}`;
 
 
-          // Stop the timer
-          clearInterval(countdown);
-          timerElement.textContent = "0";
-          timerElement.classList.add("hidden"); // Hide timer
+        // Stop the timer
+        clearInterval(countdown);
+        timerElement.textContent = "0";
+        timerElement.classList.add("hidden"); // Hide timer
 
-          // Hide all buttons
-          answerButton.style.display = "none";
-          correctButton.style.display = "none";
-          wrongButton.style.display = "none";
-          nextButton.style.display = "none";
-      }
-    }
+        // Hide all buttons
+        answerButton.style.display = "none";
+        correctButton.style.display = "none";
+        wrongButton.style.display = "none";
+        nextButton.style.display = "none";
+
+        // Show the "Next Game" button
+        const nextGameButton = document.getElementById("next-game-button");
+        nextGameButton.classList.remove("hidden");
+    } }
 
     // shuffle array
     function shuffleArray(array) {

@@ -9,6 +9,10 @@ body {
     padding: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 h1 {
     font-family: "Rubik", serif;
     color: #0D9276;

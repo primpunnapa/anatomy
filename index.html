@@ -22,7 +22,7 @@
         <a href="#" class="logo">AnatomyGames</a>
         <nav class="navbar">
 
-            <a href="#3d">3D MODELS</a>
+            <a href="#info">3D MODELS</a>
             <a href="#brain_game">BRAIN GAMES</a>
             <a href="#skull_game">SKULL GAMES</a>
             <a href="#type">TYPE</a>
@@ -32,7 +32,7 @@
         </nav>
     </header1>
 
-
+    
     <!-- Main Content -->
 
     <main id="main" class="container py-4">
@@ -42,60 +42,31 @@
             <p style="padding-bottom: 40px;">Interact with the 3D model of the base of the skull for a deeper understanding.</p>
         </section>
 
-        <!-- 3D section -->
-        <section id="3d" class="mt-5">
-            <div class="row g-4">
 
-                <!-- 3D Cards 2 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm skull-card-img">
-                        <img src="cover-pic/skullbone.png" class="card-img-top" alt="Cranial Nerves with Name">
-                        <div class="card-body">
-                            <h5 class="card-title">Skull bones</h5>
-                            <p class="card-text">Discover the detailed structure of the skull bones. Identify each part and understand its.</p>
-                            <a href="3D2.html" class="btn btn-primary">Learn</a>
-                        </div>
-                    </div>
-                </div>
+        <body>
+            <div id="info"></div>
+            <style>
+                .sketchfab-embed-wrapper iframe {
+                width: 100%; /* ให้ iframe มีความกว้างเต็มคอนเทนเนอร์ */
+                height: 1000px; /* ให้ iframe มีความสูงเต็มคอนเทนเนอร์ */
+                }
+            </style>
+            <div class="sketchfab-embed-wrapper"> 
+                <iframe title="Plastic Skull" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/e657167272c64bc5add7f96ca87fd3f9/embed?autospin=1&autostart=1&preload=1&transparent=1"> 
+                </iframe> 
 
-                <!-- 3D Cards 3 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm skull-card-img">
-                        <img src="cover-pic/superior1.png" class="card-img-top" alt="Cranial Nerves with Name">
-                        <div class="card-body">
-                            <h5 class="card-title">Base of skull - Superior Aspect</h5>
-                            <p class="card-text">Examine the skull base from a superior perspective. Identify key foramina and trace the pathways of cranial nerves.</p>
-                            <a href="3D3.html" class="btn btn-primary">Learn</a>
-                        </div>
-                    </div>
-                </div>
+                <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> 
 
-                <!-- 3D Cards 4 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm skull-card-img">
-                        <img src="cover-pic/anterior.png" class="card-img-top" alt="Cranial Nerves with Name">
-                        <div class="card-body">
-                            <h5 class="card-title">Base of Skull - Anterior Aspect</h5>
-                            <p class="card-text">View the skull base from the front. Learn how cranial nerves pass through different foramina.</p>
-                            <a href="3D4.html" class="btn btn-primary">Learn</a>
-                        </div>
-                    </div>
-                </div>
+                    <a href="https://sketchfab.com/3d-models/plastic-skull-e657167272c64bc5add7f96ca87fd3f9?utm_medium=embed&utm_campaign=share-popup&utm_content=e657167272c64bc5add7f96ca87fd3f9" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Plastic Skull </a>   
+                    by <a href="https://sketchfab.com/Aj_Ple?utm_medium=embed&utm_campaign=share-popup&utm_content=e657167272c64bc5add7f96ca87fd3f9" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Aj_Ple </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=e657167272c64bc5add7f96ca87fd3f9" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab
 
-                <!-- 3D Cards 5 -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="card shadow-sm skull-card-img">
-                        <img src="cover-pic/inferior.png" class="card-img-top" alt="Cranial Nerves with Name">
-                        <div class="card-body">
-                            <h5 class="card-title">Base of Skull - Inferior Aspect</h5>
-                            <p class="card-text">Observe the skull from below. Identify foramina and track how cranial nerves exit and enter the skull.</p>
-                            <a href="3D5.html" class="btn btn-primary">Learn</a>
-                        </div>
-                    </div>
-                </div>
-                
+                    </a>
+                </p>
             </div>
-        </section>
+        </body>
+    
+
+       
 
         <!-- Games Section -->
         <section class="mt-5">
@@ -166,6 +137,18 @@
                             <h5 class="card-title">Hole</h5>
                             <p class="card-text">Challenge yourself to locate and name different holes in the base of the skull.</p>
                             <a href="skull-hole.html" class="btn btn-primary">Play Game</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow-sm skull-card-img">
+                        <img src="cover-pic/vessel.png" class="card-img-top" alt="Base of Skull Game">
+                        <div class="card-body">
+                            <h5 class="card-title">Vessel</h5>
+                            <p class="card-text">Challenge yourself to locate and name different vessel in the base of the skull and name the artery that supply to brain.</p>
+                            <a href="vessel.html" class="btn btn-primary">Play Game</a>
                         </div>
                     </div>
                 </div>
@@ -266,8 +249,34 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-light text-center py-2 mt-4">
+    <footer class="bg-light text-center py-2 mt-4" style="background-color: #a7c4dc;">
+        <style>
+            footer a {
+                text-decoration: none;
+            }
+    
+            footer ul {
+                list-style-type: none;
+                padding-left: 0; /* Remove default padding of the ul */
+                margin-bottom: 0; /* Optional: remove default margin */
+            }
+            footer p {
+                line-height: 80px;
+                
+            }
+    
+            footer li {
+                margin-bottom: 5px; /* Optional: add some space between list items */
+            }
+        </style>
         <p class="mb-0">© 2025 Anatomy Games. All rights reserved.</p>
+        
+        <ul>
+            <li>Image Credits:</li>
+            <li>icons by <a href="https://www.flaticon.com/free-icons/1st-place" target="_blank" rel="noopener noreferrer">Md Tanvirul Haque</a> from <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">Flaticon</a></li>
+    
+            
+        </ul>
     </footer>
 </body>
 </html>
